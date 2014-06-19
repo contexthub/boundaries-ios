@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F0052EE195365BB00DF2708 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052ED195365BB00DF2708 /* Foundation.framework */; };
+		1F0052F0195365BB00DF2708 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052EF195365BB00DF2708 /* CoreGraphics.framework */; };
+		1F0052F2195365BB00DF2708 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052F1195365BB00DF2708 /* UIKit.framework */; };
+		1F0052F8195365BB00DF2708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F0052F6195365BB00DF2708 /* InfoPlist.strings */; };
+		1F0052FA195365BB00DF2708 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0052F9195365BB00DF2708 /* main.m */; };
+		1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0052FD195365BB00DF2708 /* GFAppDelegate.m */; };
+		1F005300195365BB00DF2708 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0052FF195365BB00DF2708 /* Images.xcassets */; };
+		1F005307195365BB00DF2708 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F005306195365BB00DF2708 /* XCTest.framework */; };
+		1F005308195365BB00DF2708 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052ED195365BB00DF2708 /* Foundation.framework */; };
+		1F005309195365BB00DF2708 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052F1195365BB00DF2708 /* UIKit.framework */; };
+		1F005311195365BB00DF2708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F00530F195365BB00DF2708 /* InfoPlist.strings */; };
+		1F005313195365BB00DF2708 /* GeofencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005312195365BB00DF2708 /* GeofencesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F00530A195365BB00DF2708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0052E2195365BB00DF2708 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F0052E9195365BB00DF2708;
+			remoteInfo = Geofences;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1F0052EA195365BB00DF2708 /* Geofences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geofences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F0052ED195365BB00DF2708 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1F0052EF195365BB00DF2708 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1F0052F1195365BB00DF2708 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1F0052F5195365BB00DF2708 /* Geofences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Geofences-Info.plist"; sourceTree = "<group>"; };
+		1F0052F7195365BB00DF2708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F0052F9195365BB00DF2708 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1F0052FB195365BB00DF2708 /* Geofences-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Geofences-Prefix.pch"; sourceTree = "<group>"; };
+		1F0052FC195365BB00DF2708 /* GFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFAppDelegate.h; sourceTree = "<group>"; };
+		1F0052FD195365BB00DF2708 /* GFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFAppDelegate.m; sourceTree = "<group>"; };
+		1F0052FF195365BB00DF2708 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1F005305195365BB00DF2708 /* GeofencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeofencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F005306195365BB00DF2708 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1F00530E195365BB00DF2708 /* GeofencesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeofencesTests-Info.plist"; sourceTree = "<group>"; };
+		1F005310195365BB00DF2708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F005312195365BB00DF2708 /* GeofencesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeofencesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F0052E7195365BB00DF2708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F0052F0195365BB00DF2708 /* CoreGraphics.framework in Frameworks */,
+				1F0052F2195365BB00DF2708 /* UIKit.framework in Frameworks */,
+				1F0052EE195365BB00DF2708 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F005302195365BB00DF2708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F005307195365BB00DF2708 /* XCTest.framework in Frameworks */,
+				1F005309195365BB00DF2708 /* UIKit.framework in Frameworks */,
+				1F005308195365BB00DF2708 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F0052E1195365BB00DF2708 = {
+			isa = PBXGroup;
+			children = (
+				1F0052F3195365BB00DF2708 /* Geofences */,
+				1F00530C195365BB00DF2708 /* GeofencesTests */,
+				1F0052EC195365BB00DF2708 /* Frameworks */,
+				1F0052EB195365BB00DF2708 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F0052EB195365BB00DF2708 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F0052EA195365BB00DF2708 /* Geofences.app */,
+				1F005305195365BB00DF2708 /* GeofencesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F0052EC195365BB00DF2708 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F0052ED195365BB00DF2708 /* Foundation.framework */,
+				1F0052EF195365BB00DF2708 /* CoreGraphics.framework */,
+				1F0052F1195365BB00DF2708 /* UIKit.framework */,
+				1F005306195365BB00DF2708 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F0052F3195365BB00DF2708 /* Geofences */ = {
+			isa = PBXGroup;
+			children = (
+				1F0052FC195365BB00DF2708 /* GFAppDelegate.h */,
+				1F0052FD195365BB00DF2708 /* GFAppDelegate.m */,
+				1F0052FF195365BB00DF2708 /* Images.xcassets */,
+				1F0052F4195365BB00DF2708 /* Supporting Files */,
+			);
+			path = Geofences;
+			sourceTree = "<group>";
+		};
+		1F0052F4195365BB00DF2708 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F0052F5195365BB00DF2708 /* Geofences-Info.plist */,
+				1F0052F6195365BB00DF2708 /* InfoPlist.strings */,
+				1F0052F9195365BB00DF2708 /* main.m */,
+				1F0052FB195365BB00DF2708 /* Geofences-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F00530C195365BB00DF2708 /* GeofencesTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F005312195365BB00DF2708 /* GeofencesTests.m */,
+				1F00530D195365BB00DF2708 /* Supporting Files */,
+			);
+			path = GeofencesTests;
+			sourceTree = "<group>";
+		};
+		1F00530D195365BB00DF2708 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F00530E195365BB00DF2708 /* GeofencesTests-Info.plist */,
+				1F00530F195365BB00DF2708 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F0052E9195365BB00DF2708 /* Geofences */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F005316195365BB00DF2708 /* Build configuration list for PBXNativeTarget "Geofences" */;
+			buildPhases = (
+				1F0052E6195365BB00DF2708 /* Sources */,
+				1F0052E7195365BB00DF2708 /* Frameworks */,
+				1F00531C195365D100DF2708 /* ShellScript */,
+				1F0052E8195365BB00DF2708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Geofences;
+			productName = Geofences;
+			productReference = 1F0052EA195365BB00DF2708 /* Geofences.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1F005304195365BB00DF2708 /* GeofencesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F005319195365BB00DF2708 /* Build configuration list for PBXNativeTarget "GeofencesTests" */;
+			buildPhases = (
+				1F005301195365BB00DF2708 /* Sources */,
+				1F005302195365BB00DF2708 /* Frameworks */,
+				1F005303195365BB00DF2708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F00530B195365BB00DF2708 /* PBXTargetDependency */,
+			);
+			name = GeofencesTests;
+			productName = GeofencesTests;
+			productReference = 1F005305195365BB00DF2708 /* GeofencesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F0052E2195365BB00DF2708 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GF;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = ChaiOne;
+				TargetAttributes = {
+					1F005304195365BB00DF2708 = {
+						TestTargetID = 1F0052E9195365BB00DF2708;
+					};
+				};
+			};
+			buildConfigurationList = 1F0052E5195365BB00DF2708 /* Build configuration list for PBXProject "Geofences" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1F0052E1195365BB00DF2708;
+			productRefGroup = 1F0052EB195365BB00DF2708 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F0052E9195365BB00DF2708 /* Geofences */,
+				1F005304195365BB00DF2708 /* GeofencesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F0052E8195365BB00DF2708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F0052F8195365BB00DF2708 /* InfoPlist.strings in Resources */,
+				1F005300195365BB00DF2708 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F005303195365BB00DF2708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F005311195365BB00DF2708 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F00531C195365D100DF2708 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F0052E6195365BB00DF2708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F0052FA195365BB00DF2708 /* main.m in Sources */,
+				1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F005301195365BB00DF2708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F005313195365BB00DF2708 /* GeofencesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F00530B195365BB00DF2708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F0052E9195365BB00DF2708 /* Geofences */;
+			targetProxy = 1F00530A195365BB00DF2708 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1F0052F6195365BB00DF2708 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F0052F7195365BB00DF2708 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1F00530F195365BB00DF2708 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F005310195365BB00DF2708 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F005314195365BB00DF2708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1F005315195365BB00DF2708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F005317195365BB00DF2708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
+				INFOPLIST_FILE = "Geofences/Geofences-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1F005318195365BB00DF2708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
+				INFOPLIST_FILE = "Geofences/Geofences-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1F00531A195365BB00DF2708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Geofences.app/Geofences";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GeofencesTests/GeofencesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		1F00531B195365BB00DF2708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Geofences.app/Geofences";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
+				INFOPLIST_FILE = "GeofencesTests/GeofencesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F0052E5195365BB00DF2708 /* Build configuration list for PBXProject "Geofences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F005314195365BB00DF2708 /* Debug */,
+				1F005315195365BB00DF2708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F005316195365BB00DF2708 /* Build configuration list for PBXNativeTarget "Geofences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F005317195365BB00DF2708 /* Debug */,
+				1F005318195365BB00DF2708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1F005319195365BB00DF2708 /* Build configuration list for PBXNativeTarget "GeofencesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F00531A195365BB00DF2708 /* Debug */,
+				1F00531B195365BB00DF2708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1F0052E2195365BB00DF2708 /* Project object */;
+}
