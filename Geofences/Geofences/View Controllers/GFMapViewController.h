@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GFMapViewController : UIViewController <MKMapViewDelegate>
+@interface GFMapViewController : UIViewController <MKMapViewDelegate, UIAlertViewDelegate>
 
 @end

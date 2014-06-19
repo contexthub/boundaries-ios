@@ -48,6 +48,8 @@
     // Add the pin
     MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
     pin.coordinate = geofence.center;
+    pin.title = geofence.identifier;
+    pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
     [self.mapView addAnnotation:pin];
     
     // Add the circle indicating radius
@@ -81,11 +83,31 @@
     [self.mapView removeOverlays:overlays];
 }
 
+#pragma mark - Actions
+
+- (IBAction)addGeofenceAction:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Entier name" message:@"What is the name of your geofence?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
 #pragma mark - Events 
 
 - (void)syncCompleted:(NSNotification *)notification {
     [self removeAllGeofences];
     [self addAllGeofences];
+}
+
+#pragma mark - Alert View Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        GFGeofence *newGeofence = [[GFGeofence alloc] initWithCenter:self.mapView.userLocation.coordinate radius:50 identifier:name];
+        
+        [[GFGeofenceStore sharedInstance] addGeofence:newGeofence];
+        [self addGeofenceToMap:newGeofence];
+    }
 }
 
 
@@ -96,8 +118,8 @@
         // Draw the circle on the map how we want it (cyan inside with blue border)
         MKCircleRenderer* aRenderer = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
         
-        aRenderer.fillColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
-        aRenderer.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        aRenderer.fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        aRenderer.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
         aRenderer.lineWidth = 3;
         return aRenderer;
     }

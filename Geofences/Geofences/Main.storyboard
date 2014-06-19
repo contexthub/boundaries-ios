@@ -16,13 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-zm-dC2">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items/>
-                            </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
-                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="1jg-zy-3iM" id="Zt9-BR-o9d"/>
@@ -30,15 +25,13 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="oLb-zm-dC2" firstAttribute="leading" secondItem="jeN-jq-HCR" secondAttribute="leading" id="5qF-oZ-Kw2"/>
-                            <constraint firstItem="oLb-zm-dC2" firstAttribute="top" secondItem="DYe-GI-D3C" secondAttribute="bottom" id="6pe-Fo-Z15"/>
-                            <constraint firstAttribute="trailing" secondItem="oLb-zm-dC2" secondAttribute="trailing" id="LcY-Bz-nfE"/>
-                            <constraint firstItem="7Pp-Vn-q97" firstAttribute="top" secondItem="oLb-zm-dC2" secondAttribute="bottom" id="WgM-oH-RfU"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Geofences" id="fKS-Rv-Luo">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sPC-rd-yEO"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sPC-rd-yEO">
+                            <connections>
+                                <action selector="addGeofenceAction:" destination="1jg-zy-3iM" id="ycT-rK-knV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="DYe-GI-D3C" id="m2r-kt-R2s"/>
