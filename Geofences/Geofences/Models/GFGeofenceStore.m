@@ -10,8 +10,8 @@
 
 #import "GFGeofence.h"
 
-NSString const *GeofenceTagName = @"geofences";
-NSString const *GeofenceSyncCompletedNotification = @"GeofenceSyncCompletedNotification";
+NSString const *GFGeofenceTagName = @"geofences";
+NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedNotification";
 
 @interface GFGeofenceStore ()
 
@@ -42,7 +42,7 @@ NSString const *GeofenceSyncCompletedNotification = @"GeofenceSyncCompletedNotif
 }
 
 - (void)syncGeofences {
-    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GeofenceTagName] location:nil completionHandler:^(NSArray *geofences, NSError *error) {
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTagName] location:nil completionHandler:^(NSArray *geofences, NSError *error) {
         if (!error) {
             NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
@@ -52,6 +52,9 @@ NSString const *GeofenceSyncCompletedNotification = @"GeofenceSyncCompletedNotif
                 GFGeofence *geofence = [[GFGeofence alloc] initFromDictionary:geofenceDict];
                 [self.geofenceArray addObject:geofence];
             }
+            
+            // Post notification that sync is complete
+            [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)GFGeofenceSyncCompletedNotification object:nil];
         } else {
             NSLog(@"GF: Could not sync geofences with ContextHub");
         }
@@ -63,7 +66,7 @@ NSString const *GeofenceSyncCompletedNotification = @"GeofenceSyncCompletedNotif
     [self.geofenceArray addObject:geofence];
     
     // Create it in ContextHub
-    [[CCHGeofenceService sharedInstance] createGeofence:(CLCircularRegion *)geofence tags:@[GeofenceTagName] completionHandler:^(NSDictionary *createdGeofence, NSError *error) {
+    [[CCHGeofenceService sharedInstance] createGeofence:(CLCircularRegion *)geofence tags:@[GFGeofenceTagName] completionHandler:^(NSDictionary *createdGeofence, NSError *error) {
         if (!error) {
             geofence.geofenceID = (NSInteger)createdGeofence[@"id"];
             geofence.tags = createdGeofence[@"tags"];

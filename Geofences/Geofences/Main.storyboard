@@ -24,28 +24,22 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1jg-zy-3iM" id="Zt9-BR-o9d"/>
+                                </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Zr-i2p">
-                                <rect key="frame" x="125" y="494" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Create">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hcj-Zr-i2p" firstAttribute="leading" secondItem="jeN-jq-HCR" secondAttribute="leading" constant="125" id="0IW-wr-OhR"/>
                             <constraint firstItem="oLb-zm-dC2" firstAttribute="leading" secondItem="jeN-jq-HCR" secondAttribute="leading" id="5qF-oZ-Kw2"/>
                             <constraint firstItem="oLb-zm-dC2" firstAttribute="top" secondItem="DYe-GI-D3C" secondAttribute="bottom" id="6pe-Fo-Z15"/>
                             <constraint firstAttribute="trailing" secondItem="oLb-zm-dC2" secondAttribute="trailing" id="LcY-Bz-nfE"/>
                             <constraint firstItem="7Pp-Vn-q97" firstAttribute="top" secondItem="oLb-zm-dC2" secondAttribute="bottom" id="WgM-oH-RfU"/>
-                            <constraint firstAttribute="trailing" secondItem="hcj-Zr-i2p" secondAttribute="trailing" constant="125" id="rmf-jY-N7l"/>
-                            <constraint firstItem="hcj-Zr-i2p" firstAttribute="bottom" secondItem="oLb-zm-dC2" secondAttribute="bottom" constant="-44" id="sA4-Tm-AMO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Geofences" id="fKS-Rv-Luo"/>
+                    <navigationItem key="navigationItem" title="Geofences" id="fKS-Rv-Luo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sPC-rd-yEO"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="DYe-GI-D3C" id="m2r-kt-R2s"/>
                     </connections>

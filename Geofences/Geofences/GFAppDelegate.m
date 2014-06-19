@@ -21,12 +21,9 @@
     
     [ContextHub registerWithAppId:@"4e0aad2a-b052-42e0-93ee-6f024d11de10"];
     
-    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GeofenceTagName]]) {
-        NSLog(@"GF: Failed to add subscription to \"%@\" tag", GeofenceTagName);
+    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GFGeofenceTagName]]) {
+        NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTagName);
     }
-    
-    // Do initial data sync
-    [[GFGeofenceStore sharedInstance] syncGeofences];
     
     return YES;
 }
