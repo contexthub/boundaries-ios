@@ -19,6 +19,14 @@
 		1F005309195365BB00DF2708 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0052F1195365BB00DF2708 /* UIKit.framework */; };
 		1F005311195365BB00DF2708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F00530F195365BB00DF2708 /* InfoPlist.strings */; };
 		1F005313195365BB00DF2708 /* GeofencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005312195365BB00DF2708 /* GeofencesTests.m */; };
+		1F00531E1953666B00DF2708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F00531D1953666B00DF2708 /* Main.storyboard */; };
+		1F005323195367C900DF2708 /* GFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005322195367C900DF2708 /* GFMapViewController.m */; };
+		1F005326195367F000DF2708 /* GFGeofence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005325195367F000DF2708 /* GFGeofence.m */; };
+		1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0053281953680D00DF2708 /* GFGeofenceStore.m */; };
+		1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532A195368C200DF2708 /* CoreLocation.framework */; };
+		1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532C195368C900DF2708 /* CoreMotion.framework */; };
+		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
+		1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053301953694600DF2708 /* ContextHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,17 @@
 		1F00530E195365BB00DF2708 /* GeofencesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeofencesTests-Info.plist"; sourceTree = "<group>"; };
 		1F005310195365BB00DF2708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1F005312195365BB00DF2708 /* GeofencesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeofencesTests.m; sourceTree = "<group>"; };
+		1F00531D1953666B00DF2708 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		1F005321195367C900DF2708 /* GFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFMapViewController.h; path = "View Controllers/GFMapViewController.h"; sourceTree = "<group>"; };
+		1F005322195367C900DF2708 /* GFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFMapViewController.m; path = "View Controllers/GFMapViewController.m"; sourceTree = "<group>"; };
+		1F005324195367F000DF2708 /* GFGeofence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofence.h; path = Models/GFGeofence.h; sourceTree = "<group>"; };
+		1F005325195367F000DF2708 /* GFGeofence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofence.m; path = Models/GFGeofence.m; sourceTree = "<group>"; };
+		1F0053271953680D00DF2708 /* GFGeofenceStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofenceStore.h; path = Models/GFGeofenceStore.h; sourceTree = "<group>"; };
+		1F0053281953680D00DF2708 /* GFGeofenceStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofenceStore.m; path = Models/GFGeofenceStore.m; sourceTree = "<group>"; };
+		1F00532A195368C200DF2708 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1F00532C195368C900DF2708 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1F0053301953694600DF2708 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +74,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */,
+				1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */,
+				1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */,
+				1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */,
 				1F0052F0195365BB00DF2708 /* CoreGraphics.framework in Frameworks */,
 				1F0052F2195365BB00DF2708 /* UIKit.framework in Frameworks */,
 				1F0052EE195365BB00DF2708 /* Foundation.framework in Frameworks */,
@@ -96,6 +119,10 @@
 		1F0052EC195365BB00DF2708 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F0053301953694600DF2708 /* ContextHub.framework */,
+				1F00532E195368D000DF2708 /* MobileCoreServices.framework */,
+				1F00532C195368C900DF2708 /* CoreMotion.framework */,
+				1F00532A195368C200DF2708 /* CoreLocation.framework */,
 				1F0052ED195365BB00DF2708 /* Foundation.framework */,
 				1F0052EF195365BB00DF2708 /* CoreGraphics.framework */,
 				1F0052F1195365BB00DF2708 /* UIKit.framework */,
@@ -107,9 +134,12 @@
 		1F0052F3195365BB00DF2708 /* Geofences */ = {
 			isa = PBXGroup;
 			children = (
+				1F00531F1953676600DF2708 /* Models */,
+				1F0053201953677100DF2708 /* View Controllers */,
 				1F0052FC195365BB00DF2708 /* GFAppDelegate.h */,
 				1F0052FD195365BB00DF2708 /* GFAppDelegate.m */,
 				1F0052FF195365BB00DF2708 /* Images.xcassets */,
+				1F00531D1953666B00DF2708 /* Main.storyboard */,
 				1F0052F4195365BB00DF2708 /* Supporting Files */,
 			);
 			path = Geofences;
@@ -142,6 +172,26 @@
 				1F00530F195365BB00DF2708 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F00531F1953676600DF2708 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1F005324195367F000DF2708 /* GFGeofence.h */,
+				1F005325195367F000DF2708 /* GFGeofence.m */,
+				1F0053271953680D00DF2708 /* GFGeofenceStore.h */,
+				1F0053281953680D00DF2708 /* GFGeofenceStore.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1F0053201953677100DF2708 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1F005321195367C900DF2708 /* GFMapViewController.h */,
+				1F005322195367C900DF2708 /* GFMapViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +273,7 @@
 			files = (
 				1F0052F8195365BB00DF2708 /* InfoPlist.strings in Resources */,
 				1F005300195365BB00DF2708 /* Images.xcassets in Resources */,
+				1F00531E1953666B00DF2708 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +308,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F005326195367F000DF2708 /* GFGeofence.m in Sources */,
+				1F005323195367C900DF2708 /* GFMapViewController.m in Sources */,
+				1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */,
 				1F0052FA195365BB00DF2708 /* main.m in Sources */,
 				1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */,
 			);
@@ -375,6 +429,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
 				INFOPLIST_FILE = "Geofences/Geofences-Info.plist";
@@ -388,6 +446,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geofences/Geofences-Prefix.pch";
 				INFOPLIST_FILE = "Geofences/Geofences-Info.plist";
