@@ -27,6 +27,7 @@
 		1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532C195368C900DF2708 /* CoreMotion.framework */; };
 		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
 		1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053301953694600DF2708 /* ContextHub.framework */; };
+		1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053321953780F00DF2708 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		1F00532C195368C900DF2708 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1F0053301953694600DF2708 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
+		1F0053321953780F00DF2708 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */,
 				1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */,
 				1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */,
 				1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */,
@@ -120,11 +123,12 @@
 			isa = PBXGroup;
 			children = (
 				1F0053301953694600DF2708 /* ContextHub.framework */,
-				1F00532E195368D000DF2708 /* MobileCoreServices.framework */,
-				1F00532C195368C900DF2708 /* CoreMotion.framework */,
-				1F00532A195368C200DF2708 /* CoreLocation.framework */,
-				1F0052ED195365BB00DF2708 /* Foundation.framework */,
 				1F0052EF195365BB00DF2708 /* CoreGraphics.framework */,
+				1F00532A195368C200DF2708 /* CoreLocation.framework */,
+				1F00532C195368C900DF2708 /* CoreMotion.framework */,
+				1F0052ED195365BB00DF2708 /* Foundation.framework */,
+				1F0053321953780F00DF2708 /* MapKit.framework */,
+				1F00532E195368D000DF2708 /* MobileCoreServices.framework */,
 				1F0052F1195365BB00DF2708 /* UIKit.framework */,
 				1F005306195365BB00DF2708 /* XCTest.framework */,
 			);

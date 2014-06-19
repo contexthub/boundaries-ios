@@ -10,7 +10,8 @@
 
 #import "GFGeofence.h"
 
-NSString const *geofenceTagName = @"geofences";
+NSString const *GeofenceTagName = @"geofences";
+NSString const *GeofenceSyncCompletedNotification = @"GeofenceSyncCompletedNotification";
 
 @interface GFGeofenceStore ()
 
@@ -41,9 +42,16 @@ NSString const *geofenceTagName = @"geofences";
 }
 
 - (void)syncGeofences {
-    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[geofenceTagName] location:nil completionHandler:^(NSArray *geofences, NSError *error) {
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GeofenceTagName] location:nil completionHandler:^(NSArray *geofences, NSError *error) {
         if (!error) {
-            NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", self.geofenceArray.count - geofences.count);
+            NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
+            
+            [self.geofenceArray removeAllObjects];
+            
+            for (NSDictionary *geofenceDict in geofences) {
+                GFGeofence *geofence = [[GFGeofence alloc] initFromDictionary:geofenceDict];
+                [self.geofenceArray addObject:geofence];
+            }
         } else {
             NSLog(@"GF: Could not sync geofences with ContextHub");
         }
@@ -55,13 +63,13 @@ NSString const *geofenceTagName = @"geofences";
     [self.geofenceArray addObject:geofence];
     
     // Create it in ContextHub
-    [[CCHGeofenceService sharedInstance] createGeofence:(CLCircularRegion *)geofence tags:@[geofenceTagName] completionHandler:^(NSDictionary *createdGeofence, NSError *error) {
+    [[CCHGeofenceService sharedInstance] createGeofence:(CLCircularRegion *)geofence tags:@[GeofenceTagName] completionHandler:^(NSDictionary *createdGeofence, NSError *error) {
         if (!error) {
             geofence.geofenceID = (NSInteger)createdGeofence[@"id"];
             geofence.tags = createdGeofence[@"tags"];
-            NSLog(@"GF: Successfully created geofence %@ on ContextHub", geofence.name);
+            NSLog(@"GF: Successfully created geofence %@ on ContextHub", geofence.identifier);
         } else {
-            NSLog(@"GF: Could not create geofence %@ on ContextHub", geofence.name);
+            NSLog(@"GF: Could not create geofence %@ on ContextHub", geofence.identifier);
         }
     }];
 }
@@ -77,9 +85,9 @@ NSString const *geofenceTagName = @"geofences";
     // Remove geofence from ContextHub
     [[CCHGeofenceService sharedInstance] deleteGeofence:geofenceDict completionHandler:^(NSError *error) {
         if (!error) {
-            NSLog(@"GF: Successfully deleted geofence %@ on ContextHub", geofence.name);
+            NSLog(@"GF: Successfully deleted geofence %@ on ContextHub", geofence.identifier);
         } else {
-            NSLog(@"GF: Could not delete geofence %@ on ContextHub", geofence.name);
+            NSLog(@"GF: Could not delete geofence %@ on ContextHub", geofence.identifier);
         }
     }];
 }

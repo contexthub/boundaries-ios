@@ -16,19 +16,14 @@
 
 @implementation GFMapViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Set the map to where the user is located currently, and turn on tracking mode.
+    MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 1500, 1500);
+    [self.mapView setRegion:newRegion animated:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
 }
 
 - (void)didReceiveMemoryWarning

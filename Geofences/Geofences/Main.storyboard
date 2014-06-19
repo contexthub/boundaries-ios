@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Map View Controller - Geofences-->
         <scene sceneID="wEQ-Se-6db">
             <objects>
                 <viewController id="1jg-zy-3iM" customClass="GFMapViewController" sceneMemberID="viewController">
@@ -16,26 +16,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-zm-dC2">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-zm-dC2">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items/>
                             </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Zr-i2p">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Zr-i2p">
                                 <rect key="frame" x="125" y="494" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Create">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hcj-Zr-i2p" firstAttribute="leading" secondItem="jeN-jq-HCR" secondAttribute="leading" constant="125" id="0IW-wr-OhR"/>
+                            <constraint firstItem="oLb-zm-dC2" firstAttribute="leading" secondItem="jeN-jq-HCR" secondAttribute="leading" id="5qF-oZ-Kw2"/>
+                            <constraint firstItem="oLb-zm-dC2" firstAttribute="top" secondItem="DYe-GI-D3C" secondAttribute="bottom" id="6pe-Fo-Z15"/>
+                            <constraint firstAttribute="trailing" secondItem="oLb-zm-dC2" secondAttribute="trailing" id="LcY-Bz-nfE"/>
+                            <constraint firstItem="7Pp-Vn-q97" firstAttribute="top" secondItem="oLb-zm-dC2" secondAttribute="bottom" id="WgM-oH-RfU"/>
+                            <constraint firstAttribute="trailing" secondItem="hcj-Zr-i2p" secondAttribute="trailing" constant="125" id="rmf-jY-N7l"/>
+                            <constraint firstItem="hcj-Zr-i2p" firstAttribute="bottom" secondItem="oLb-zm-dC2" secondAttribute="bottom" constant="-44" id="sA4-Tm-AMO"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fKS-Rv-Luo"/>
+                    <navigationItem key="navigationItem" title="Geofences" id="fKS-Rv-Luo"/>
                     <connections>
                         <outlet property="mapView" destination="DYe-GI-D3C" id="m2r-kt-R2s"/>
                     </connections>

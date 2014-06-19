@@ -19,10 +19,10 @@
     [[ContextHub sharedInstance] setDebug:TRUE];
 #endif
     
-    [ContextHub registerWithAppId:@""];
+    [ContextHub registerWithAppId:@"4e0aad2a-b052-42e0-93ee-6f024d11de10"];
     
-    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[geofenceTagName]]) {
-        NSLog(@"GF: Failed to add subscription to \"%@\" tag", geofenceTagName);
+    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GeofenceTagName]]) {
+        NSLog(@"GF: Failed to add subscription to \"%@\" tag", GeofenceTagName);
     }
     
     // Do initial data sync
