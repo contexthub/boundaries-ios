@@ -8,14 +8,26 @@
 
 #import "GFAppDelegate.h"
 
+#import "GFGeofenceStore.h"
+
 @implementation GFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    // Register with ContextHub
+#ifdef DEBUG
+    [[ContextHub sharedInstance] setDebug:TRUE];
+#endif
+    
+    [ContextHub registerWithAppId:@""];
+    
+    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[geofenceTagName]]) {
+        NSLog(@"GF: Failed to add subscription to \"%@\" tag", geofenceTagName);
+    }
+    
+    // Do initial data sync
+    [[GFGeofenceStore sharedInstance] syncGeofences];
+    
     return YES;
 }
 

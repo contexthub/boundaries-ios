@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString const *geofenceTagName;
+
+
+@class GFGeofence;
+
 @interface GFGeofenceStore : NSObject
+
+@property (nonatomic, strong, readonly) NSMutableArray *geofences;
+
++ (GFGeofenceStore *)sharedInstance;
+
+- (void)syncGeofences;
+- (void)addGeofence:(GFGeofence *)geofence;
+- (void)removeGeofence:(GFGeofence *)geofence;
 
 @end
