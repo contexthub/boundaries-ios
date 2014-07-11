@@ -30,7 +30,7 @@ In this sample application, we use ContextHub to trigger events on the server by
 ## ContextHub.com
 
 1. The real power of ContextHub comes from collecting and reacting to events posted from devices onto the server. Go to the [developer portal](https://app.contexthub.com) and click on your  Geofence app to access its data.
-1. Click on the "Geofences" tab.  You should see the geofence that you just created in the simulator.  From you you can create, update, and delete geofences.
+1. Click on the "Geofences" tab.  You should see the geofence that you just created in the simulator.  From here you can create, update, and delete geofences.
 1. Next click on the Contexts link which will take you to the "Contexts" page. Contexts let you change how the server will respond to events triggered by devices. Let's go ahead and create a new context.
 
 ## Creating a New Context
