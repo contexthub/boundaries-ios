@@ -7,8 +7,8 @@
 //
 
 #import "GFGeofenceStore.h"
-
 #import "GFGeofence.h"
+#import <ContextHub/ContextHub.h>
 
 NSString const *GFGeofenceTagName = @"geofences";
 NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedNotification";
@@ -42,7 +42,9 @@ NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedN
 }
 
 - (void)syncGeofences {
-    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTagName] location:nil completionHandler:^(NSArray *geofences, NSError *error) {
+
+
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTagName] location:nil radius:1000 completionHandler:^(NSArray *geofences, NSError *error) {
         if (!error) {
             NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
@@ -61,18 +63,19 @@ NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedN
     }];
 }
 
-- (void)addGeofence:(GFGeofence *)geofence {
+- (void)addGeofence:(GFGeofence *)fence {
     // Add geofence to our array
-    [self.geofenceArray addObject:geofence];
+    [self.geofenceArray addObject:fence];
     
+    __block GFGeofence *__fence = fence;
     // Create it in ContextHub
-    [[CCHGeofenceService sharedInstance] createGeofence:(CLCircularRegion *)geofence tags:@[GFGeofenceTagName] completionHandler:^(NSDictionary *createdGeofence, NSError *error) {
+    [[CCHGeofenceService sharedInstance] createGeofenceWithCenter:fence.center radius:fence.radius name:fence.identifier tags:@[GFGeofenceTagName] completionHandler:^(NSDictionary *geofence, NSError *error) {
         if (!error) {
-            geofence.geofenceID = (NSInteger)createdGeofence[@"id"];
-            geofence.tags = createdGeofence[@"tags"];
-            NSLog(@"GF: Successfully created geofence %@ on ContextHub", geofence.identifier);
+            __fence.geofenceID = (NSInteger)geofence[@"id"];
+            __fence.tags = geofence[@"tags"];
+            NSLog(@"GF: Successfully created geofence %@ on ContextHub", fence.identifier);
         } else {
-            NSLog(@"GF: Could not create geofence %@ on ContextHub", geofence.identifier);
+            NSLog(@"GF: Could not create geofence %@ on ContextHub", fence.identifier);
         }
     }];
 }

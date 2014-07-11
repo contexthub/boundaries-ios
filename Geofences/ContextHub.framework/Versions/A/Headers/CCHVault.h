@@ -16,29 +16,44 @@ typedef NS_ENUM(NSInteger, CCHVaultErrorCode) {
     /**
      missing container error code.
      */
-    CCHMissingContainer = 0,
+    CCHMissingContainer,
     /**
      missing item error code.
      */
-    CCHMissingItem = 1,
+    CCHMissingItem,
     /**
      missing vault id error code.
      */
-    CCHMissingVaultId = 2,
+    CCHMissingVaultId,
     /**
      missing vault information error code.
      */
-    CCHInvalidVaultDictionary = 3
-    
+    CCHInvalidVaultDictionary,
+    /**
+     invalid JSON object.
+     */
+    CCHInvalidVaultJSONObject
 };
 
 typedef void (^vaultCompletionBlock)(NSDictionary *response, NSError *error);
 typedef void (^vaultListingCompletionBlock)(NSArray *responses, NSError *error);
 
 /**
- The CCHVault should be used to persist data to the ContextHub Vault API.  This class provides methods for creating data in containers.
- Once you persist data, you can retrieve it by Container and Id.
- @note You can think of a container as a bucket for common data.
+ The CCHVault is used to persist data on the ContextHub servers.  This class provides methods for storing data on ContextHub servers.  Data stored in the vault can be accessed inside the ContextRules.
+ Once you persist data, you can retrieve it by Tag or id.
+ @note It's a good idea to tag similar items with a common tag. For example, employee objects could be tagged as employees. You can add multiple tags to an item.
+ 
+ Vault repsponses will contain a dictionary with a data key and a vault_info key.  The data key contains the JSON data that was used to create the record.
+ The value of the vault_info key is used by the Vault Service to manage the data.
+ 
+ Structure of vault_info
+ 
+ | key       | value     |
+ | --------- | --------- |
+ | id        | unique id of the vault item on the ContextHub server |
+ | created_on | the date/time the item was created on the server |
+ | updated_on | the date/time that the item was last modified |
+ | tags | an array of tags assigned to the item |
  */
 @interface CCHVault : NSObject
 
@@ -48,45 +63,52 @@ typedef void (^vaultListingCompletionBlock)(NSArray *responses, NSError *error);
 + (instancetype)sharedInstance;
 
 /**
- Creates items in the ContextHub Vault.
- @param item the NSDictionary representation of the item you want to persist.
- @param containerName the name of the container that will be used to store similar data.
- @param attachments (optional) an array of CCHVaultResource objects.
- @param completionHandler (optional) called when the request completes. The block is passed an NSDictionary representation of the item. If an error occurs, the NSError will be passed to the block.
- @note the dictionary that is returned will have a key name vault_info.  This object contains the id and other metadata that is used to work with the item on the ContextHub server.
- @note the name used in the CCHVaultResource will be added as a property on the item.  The property will contain the URL that you can use to download the file.
+ Creates items in the Vault.
+ @param item The item you want to persist.  This item must be a valid JSON object. See NSJSONSerialization:isValidJSONObject.
+ @param tags (optional) The tags to be applied to the item.
+ @param completionHandler (optional) Called when the request completes. The block is passed an NSDictionary representation of the item. If an error occurs, the NSError will be passed to the block.
+ @note The dictionary that is returned will have a vault_info key.  This object contains the id, tags, and other metadata that is used to work with the item on the ContextHub server.
  */
-- (void)createItem:(NSDictionary *)item container:(NSString *)containerName attachments:(NSArray *)attachments completionHandler:(vaultCompletionBlock)completionHandler;
+- (void)createItem:(id)item tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *response, NSError *error))completionHandler;
 
 /**
- Gets an item from a container in the Vault.
- @param vaultId the vault id of the item.  The id is found in the key path @"vault_info.id".
- @param containerName the name of the container. the container name can be found in the key path @"vault_info.container"
- @param completionHandler called when the request completes.
+ Gets an item from the Vault.
+ @param vaultId The vault id of the item.  The id is found in the key path @"vault_info.id".
+ @param completionHandler Called when the request completes.
  */
-- (void)getItemWithId:(NSString *)vaultId container:(NSString *)containerName completionHandler:(vaultCompletionBlock)completionHandler;
+- (void)getItemWithId:(NSString *)vaultId completionHandler:(void(^)(NSDictionary *response, NSError *error))completionHandler;
 
 /**
- Gets all items stored in a container in the Vault.
- @param containerName name of the container for the items.
- @param completionHandler called when the request completes. The block is passed an NSArray of dictionaries that representation of the items.  If an error occurs, the NSError will be passed to the block.
+ Gets items stored in the Vault.
+ @param tags (optional) The tags to be applied to the item.
+ @param completionHandler Called when the request completes. The block is passed an NSArray of dictionaries that represent the items.  If an error occurs, the NSError will be passed to the block.
  */
-- (void)getItemsInContainer:(NSString *)containerName completionHandler:(vaultListingCompletionBlock)completionHandler;
+- (void)getItemsWithTags:(NSArray *)tags completionHandler:(void(^)(NSArray *responses, NSError *error))completionHandler;
+
+/**
+ Gets items stored in the Vault.
+ @note If you pass a keyPath and a value, it will return all items that have the key path equal to the value.
+ If you pass only a keyPath, it will return all items that conatin the keypath.  If you do not pass a keyPath, then both the keypath and value are ignored.
+ @param tags (optional) The tags to be applied to the item.
+ @param keyPath (optional) The keyPath that you want to look for.
+ @param value (optional) The value that you want to find for the keyPath.
+ @param completionHandler Called when the request completes. The block is passed an NSArray of dictionaries that represent the items.  If an error occurs, the NSError will be passed to the block.
+ */
+- (void)getItemsWithTags:(NSArray *)tags keyPath:(NSString *)keyPath value:(NSString *)value completionHandler:(vaultListingCompletionBlock)completionHandler;
 
 /**
  Updates an item in the Vault.
- @param item to be updated.
- @param attachments (optional) an array of CCHVaultResource objects.
- @param completionHandler (optional) called when the request completes. The block is passed an NSDictionary representation of the item. If an error occurs, the NSError will be passed to the block.
- @note the name used in the CCHVaultResource will be added as a property on the item.  The property will contain the URL that you can use to download the file.
+ @param item The item to be updated.
+ @param completionHandler (optional) Called when the request completes. The block is passed an NSDictionary representation of the item. If an error occurs, the NSError will be passed to the block.
  */
-- (void)updateItem:(NSDictionary *)item attachments:(NSArray *)attachments completionHandler:(vaultCompletionBlock)completionHandler;
+- (void)updateItem:(NSDictionary *)item completionHandler:(void(^)(NSDictionary *response, NSError *error))completionHandler;
 
 /**
  Deletes an item from the Vault.
- @param item item to be deleted;
- @param completionHandler (optional) called when the request completes. If an error occurs, the NSError will be passed to the block.
+ @param item The item to be deleted;
+ @param completionHandler (optional) Called when the request completes. If an error occurs, the NSError will be passed to the block.
  */
-- (void)deleteItem:(NSDictionary *)item completionHandler:(vaultCompletionBlock)completionHandler;
+- (void)deleteItem:(NSDictionary *)item completionHandler:(void(^)(NSDictionary *response, NSError *error))completionHandler;
+
 
 @end

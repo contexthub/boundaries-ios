@@ -17,13 +17,41 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
     /**
      Dictionary can't be used to create a geofence.
      */
-    CCHInvalidGeofenceDictionary = 0
+    CCHInvalidGeofenceDictionary,
+    /**
+    You must pass a center.
+    */
+    CCHInvalidCenterParameter,
+    /**
+     Radius cannot be nil.
+     */
+    CCHInvalidRadiusParameter,
+    /**
+     Name cannot be nil.
+     */
+    CCHInvalidNameParameter,
+    /**
+     Geofence Id cannot be nil.
+     */
+    CCHInvalidIdParameter
 };
 
 /** 
  The Geofence Service is used to create, read, update, and delete geofences on ContextHub.
+ 
+ Structure of geofence NSDictionary
+ 
+ | key       | value     |
+ | --------- | --------- |
+ | id        | unique id of the geofence on the ContextHub server |
+ | name      | name of the geofence |
+ | latitude  | latitude of the geofence (must be between -90.0 and 90.0) |
+ | longitude | longitude of the geofence (must be between -90.0 and 90.0) |
+ | radius    | radius in meters of the geofence |
+ | tags      | NSArray of tags associated with the geofence |
+ 
  */
-@interface CCHGeofenceService : CLCircularRegion
+@interface CCHGeofenceService : NSObject
 
 /**
  @return The singleton instance of the CCHGeofenceService.
@@ -32,15 +60,19 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
 
 /**
  Creates a new geofence on the ContextHub server.
- @note Tags are used to filter geofences and are used by the CCHSubscriptionService.
- @param region CLCircularRegion to be added to ContextHub.
+ @note Tags are used to filter geofences and are used by the CCHSubscriptionService
+ 
+ @param center CLLocationCoordinate2D The center coordinate of the geofence.
+ @param radius The radius of to be applied to the geofence.
+ @param name The name of the geofence.
  @param tags (optional) The tags to be applied to the geofence.
  @param completionHandler (optional) Called when the request completes.  The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError wil be passed to the block.
  */
-- (void)createGeofence:(CLCircularRegion *)region tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *geofence, NSError *error))completionHandler;
+- (void)createGeofenceWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius name:(NSString *)name tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *geofence, NSError *error))completionHandler;
 
 /**
  Gets a geofence from ContextHub using the geofence Id.
+
  @param geofenceId The id of the geofence stored in ContextHub.
  @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError wil be passed to the block.
  */
@@ -48,14 +80,17 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
 
 /**
  Gets geofences from ContextHub server.
+ 
  @param tags (optional) Tags of the geofences that you are interested in.  Passing nil will return geofences without tags.
  @param location (optional) Locatoin is used to filter the results to the nearest geofences.  Passing nil will remove the location filter.
+ @param radius (optional) Radius in meters around the location which ContextHub considers "nearby". Passing nil to location will cause this parameter to be ignored. Passing 0 will use the default radius of 50 miles (80437 meters)
  @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent geofences.  If an error occurs, the NSError will be passed to the block.
  */
-- (void)getGeofencesWithTags:(NSArray *)tags location:(CLLocation *)location completionHandler:(void(^)(NSArray *geofences, NSError *error))completionHandler;
+- (void)getGeofencesWithTags:(NSArray *)tags location:(CLLocation *)location radius:(CLLocationDistance)radius completionHandler:(void(^)(NSArray *geofences, NSError *error))completionHandler;
 
 /**
  Updates a geofence on the ContextHub server.
+ 
  @param geofence The geofence to be updated on ContextHub.
  @param completionHandler Called when the request completes. If an error occurs, the NSError will be passed to the block.
  */
@@ -63,6 +98,7 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
 
 /**
  Deletes an existing geofence from ContextHub.
+ 
  @param geofence The geofence to be deleted from ContextHub.
  @param completionHandler Called when the request completes. If an error occurs, the NSError will be passed to the block.
  */
@@ -70,6 +106,7 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
 
 /**
  Creates a CLCircularRegion from a geofence dictionary.
+ 
  @note This is intended to be used with the geofences that are returned in the CCHGeofenceService.
  @param geofence NSDictionary that contains geofence information.
  @return A CLCircularRegion from a geofence dictionary.

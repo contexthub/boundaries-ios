@@ -26,9 +26,9 @@
 		1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532A195368C200DF2708 /* CoreLocation.framework */; };
 		1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532C195368C900DF2708 /* CoreMotion.framework */; };
 		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
-		1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053301953694600DF2708 /* ContextHub.framework */; };
 		1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053321953780F00DF2708 /* MapKit.framework */; };
 		1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */; };
+		3DCB100D19703F8B00F7591C /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCB100C19703F8B00F7591C /* ContextHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,10 +68,10 @@
 		1F00532A195368C200DF2708 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1F00532C195368C900DF2708 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		1F0053301953694600DF2708 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 		1F0053321953780F00DF2708 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLCircularRegion+ContextHub.h"; path = "Models/CLCircularRegion+ContextHub.h"; sourceTree = "<group>"; };
 		1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLCircularRegion+ContextHub.m"; path = "Models/CLCircularRegion+ContextHub.m"; sourceTree = "<group>"; };
+		3DCB100C19703F8B00F7591C /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +81,9 @@
 			files = (
 				1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */,
 				1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */,
-				1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */,
 				1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */,
 				1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */,
+				3DCB100D19703F8B00F7591C /* ContextHub.framework in Frameworks */,
 				1F0052F0195365BB00DF2708 /* CoreGraphics.framework in Frameworks */,
 				1F0052F2195365BB00DF2708 /* UIKit.framework in Frameworks */,
 				1F0052EE195365BB00DF2708 /* Foundation.framework in Frameworks */,
@@ -125,7 +125,7 @@
 		1F0052EC195365BB00DF2708 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F0053301953694600DF2708 /* ContextHub.framework */,
+				3DCB100C19703F8B00F7591C /* ContextHub.framework */,
 				1F0052EF195365BB00DF2708 /* CoreGraphics.framework */,
 				1F00532A195368C200DF2708 /* CoreLocation.framework */,
 				1F00532C195368C900DF2708 /* CoreMotion.framework */,
@@ -253,7 +253,7 @@
 				ORGANIZATIONNAME = ChaiOne;
 				TargetAttributes = {
 					1F0052E9195365BB00DF2708 = {
-						DevelopmentTeam = K83DSSAEPP;
+						DevelopmentTeam = FACNVSTRSZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

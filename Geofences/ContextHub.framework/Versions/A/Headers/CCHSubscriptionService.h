@@ -55,6 +55,21 @@ extern NSString * const CCHGeofenceUpdatedNotification;
  */
 extern NSString * const CCHGeofenceDeletedNotification;
 
+/**
+ Posted to tagged vault subscribers when a corresponding tagged vault item is created.
+ */
+extern NSString * const CCHVaultItemCreatedNotification;
+
+/**
+ Posted to tagged vault subscribers when a corresponding tagged vault item is updated.
+ */
+extern NSString * const CCHVaultItemUpdatedNotification;
+
+/**
+ Posted to tagged vault subscribers when a corresponding tagged vault item is deleted.
+ */
+extern NSString * const CCHVaultItemDeletedNotification;
+
 
 
 #define kSubscriptionErrorDomain @"com.contexthub.subscription"
@@ -68,23 +83,32 @@ When changes are detected, the subscription service will post notifications to t
  When you subscribe to tags, the following notifications are posted when tagged elements are created, updated, and deleted.
  
  ### CCHBeaconCreatedNotification
- the notification object is an NSDictionary of representation of the beacon that was created.  The userInfo object is not set.
+ the notification object is an NSDictionary representation of the beacon that was created.  The userInfo object is not set.
 
  ### CCHBeaconUpdatedNotification
- the notification object is an NSDictionary of representation of the beacon that was updated.  The userInfo object is not set.
+ the notification object is an NSDictionary representation of the beacon that was updated.  The userInfo object is not set.
 
  ### CCHBeaconDeletedNotification
  the notification object is an id of the beacon that was deleted.  The userInfo object is not set.
 
  ### CCHGeofenceCreatedNotification
- the notification object is an NSDictionary of representation of the geofence that was created.  The userInfo object is not set.
+ the notification object is an NSDictionary representation of the geofence that was created.  The userInfo object is not set.
  
  ### CCHGeofenceUpdatedNotification
- the notification object is an NSDictionary of representation of the geofence that was updated.  The userInfo object is not set.
+ the notification object is an NSDictionary representation of the geofence that was updated.  The userInfo object is not set.
  
  ### CCHGeofenceDeletedNotification
  the notification object is an id of the geofence that was deleted.  The userInfo object is not set.
+
+ ### CCHVaultItemCreatedNotification
+ the notification object is an NSDictionary representation of the vault item that was created.  The userInfo object is not set.
  
+ ### CCHVaultItemUpdatedNotification
+ the notification object is an NSDictionary of representation of the vault item that was updated.  The userInfo object is not set.
+ 
+ ### CCHVaultItemDeletedNotification
+ the notification object is an id of the vualt item that was deleted.  The userInfo object is not set.
+
  */
 @interface CCHSubscriptionService : NSObject
 
@@ -95,9 +119,10 @@ When changes are detected, the subscription service will post notifications to t
 
 /**
  Gets all subscriptions for the current device.
- @param completion executed when the request completes.  The block is passed an NSArray of subscriptions.  If an error occurs, the NSError will be passed to the block.
+ @note Access individual subscriptions using "BeaconSubscription" and "GeofenceSubscription" keys
+ @param completion executed when the request completes.  The block is passed an NSDictionary of subscriptions.  If an error occurs, the NSError will be passed to the block.
  */
-- (void)getSubscriptionsWithCompletion:(void(^)(NSArray *subscripitons, NSError *error))completion;
+- (void)getSubscriptionsWithCompletion:(void(^)(NSDictionary *subscriptions, NSError *error))completion;
 
 /**
  Subscribes the device to beacon change notifications for the specified tags.

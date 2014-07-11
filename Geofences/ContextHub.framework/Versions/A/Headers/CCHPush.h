@@ -21,11 +21,11 @@
 + (instancetype)sharedInstance;
 
 /**
- * Register a device for push notifications.
- * @param token The device token.
- * @param alias (optional) A string alias to associate with the device token.
- * @param tags (optional) An array of tags to associate with the token.
- * @param completionHandler (optional) returns nil if succeeded otherwise includes an error object.
+  Register a device for push notifications.
+  @param token The device token.
+  @param alias (optional) A string alias to associate with the device token.
+  @param tags (optional) An array of tags to associate with the token.
+  @param completionHandler (optional) returns nil if succeeded otherwise includes an error object.
  */
 - (void)registerDeviceToken:(id)token alias:(NSString *)alias tags:(NSArray *)tags completionHandler:(void(^)(NSError *error))completionHandler;
 
@@ -35,8 +35,9 @@
  The userInfo dictionary can contain custom data and standard apple push notification properties.
  This implementation will pull out the apns keys and pass all other items as custom data.
  
- | key | value|
- | --- | --- |
+      userInfo
+ | key   | value |
+ | ----- | ----- |
  | alert | the message you want sent |
  | sound | sound you want played |
  | content-available | pass in a 1 if you want to deliver a push in the background |
@@ -50,43 +51,43 @@
 
 
 /**
- * Send Push Notification to aliases.
- *
- *
- * The userInfo dictionary can contain custom data and standard apple push notification properties.
- * This implementation will pull out the apns keys and pass all other items as custom data.
- *
- * | key | value|
- * | --- | --- |
- * | alert | the message you want sent |
- * | sound | the name of the sound file that you want to be played |
- * | content-available | pass in a 1 if you want to deliver a push in the background |
- * | badge | the number to be displayed on the icon |
- *
- * @param aliases The aliases to notify.
- * @param userInfo Other data to be sent in the notification.
- * @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
+ Send Push Notification to aliases.
+ 
+ The userInfo dictionary can contain custom data and standard apple push notification properties.
+ This implementation will pull out the apns keys and pass all other items as custom data.
+ 
+      userInfo
+ | key   | value |
+ | ----- | ----- |
+ | alert | the message you want sent |
+ | sound | the name of the sound file that you want to be played |
+ | content-available | pass in a 1 if you want to deliver a push in the background |
+ | badge | the number to be displayed on the icon |
+
+ @param aliases The aliases to notify.
+ @param userInfo Other data to be sent in the notification.
+ @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
  */
 - (void)sendNotificationToAliases:(NSArray *)aliases userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
 
 
 /**
- * Send Push Notification to tags.
- *
- *
- * The userInfo dictionary can contain custom data and standard apple push notification properties.
- * This implementation will pull out the apns keys and pass all other items as custom data.
- *
- * | key | value|
- * | --- | --- |
- * | alert | the message you want sent |
- * | sound | sound you want played |
- * | content-available | pass in a 1 if you want to deliver a push in the background |
- * | badge | the number to be displayed on the icon |
- *
- * @param tags The tags to notify.
- * @param userInfo Other data to be sent in the notification.
- * @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
+ Send Push Notification to tags.
+ 
+ The userInfo dictionary can contain custom data and standard apple push notification properties.
+ This implementation will pull out the apns keys and pass all other items as custom data.
+ 
+      userInfo
+ | key   | value |
+ | ----- | ----- |
+ | alert | the message you want sent |
+ | sound | sound you want played |
+ | content-available | pass in a 1 if you want to deliver a push in the background |
+ | badge | the number to be displayed on the icon |
+ 
+ @param tags The tags to notify.
+ @param userInfo Other data to be sent in the notification.
+ @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
  */
 - (void)sendNotificationToTags:(NSArray *)tags userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
 
