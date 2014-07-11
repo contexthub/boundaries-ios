@@ -10,18 +10,43 @@
 #import <CoreLocation/CoreLocation.h>
 
 #define kBeaconErrorDomain @"com.contexthub.beaconservice.error"
+
 /**
  ContextHub BeaconService error codes.
  */
 typedef NS_ENUM(NSInteger, CCHBeaconServiceErrorCode) {
     /**
-     Dictionary can't be used to create a beacon.
+     The Dictionary can't be used to create a beacon.
      */
-    CCHInvalidBeaconDictionary = 0
+    CCHInvalidBeaconDictionary,
+    /**
+     UUID cannot be nil and must be  a valid NSUUID.
+     */
+    CCHInvalidBeaconUUIDParameter,
+    /**
+     Name cannot be nil.
+     */
+    CCHInvalidBeaconNameParameter,
+    /**
+     Beacon id cannot be nil.
+     */
+    CCHInvalidBeaconIdParameter
 };
 
 /**
  The Beacon Service is used to create, read, update, and delete beacons on ContextHub.
+ 
+ Structure of the beacon NSDictionary
+ 
+ | key   | value |
+ | ----- | ----- |
+ | id    | unique id of the beacon on the ContextHub server |
+ | name  | name of the beacon |
+ | uuid  | UUID of the beacon |
+ | major | major value of the beacon |
+ | minor | minor value of the beacon |
+ | tags  | NSArray of tags associated with the beacon |
+ 
  */
 @interface CCHBeaconService : NSObject
 
@@ -33,14 +58,19 @@ typedef NS_ENUM(NSInteger, CCHBeaconServiceErrorCode) {
 /**
  Creates a new beacon on the ContextHub server.
  @note Tags are used to filter beacons and are used by the CCHSubscriptionService.
- @param beaconRegion CLBeaconRegion to be added to ContextHub.
+ 
+ @param proximityUUID The uuid for the iBeacon.
+ @param major (optional) The major value for the iBeacon.
+ @param minor (optional) The minor value for the iBeacon.
+ @param name The name of the iBeacon.
  @param tags (optional) The tags to be applied to the beacon.
  @param completionHandler (optional) Called when the request completes.  The block is passed an NSDictionary object that represents the beacon. If an error occurs, the NSError will be passed to the block.
  */
-- (void)createBeacon:(CLBeaconRegion *)beaconRegion tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *beacon, NSError *error))completionHandler;
+- (void)createBeaconWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor name:(NSString *)name tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *beacon, NSError *error))completionHandler;
 
 /**
  Gets a beacon from ContextHub using the beacon Id.
+ 
  @param beaconId The id of the beacon stored in ContextHub.
  @param completionHandler Called when the request completes.  The block is passed an NSDictionary object that represents the beacon. If an error occurs, the NSError will be passed to the block.
  */

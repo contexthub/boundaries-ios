@@ -16,10 +16,9 @@
 #import "CCHGeofenceService.h"
 #import "CCHSubscriptionService.h"
 
-//Applicatoin Services
+//Application Services
 #import "CCHPush.h"
 #import "CCHVault.h"
-#import "CCHVaultAttachment.h"
 
 
 /**
