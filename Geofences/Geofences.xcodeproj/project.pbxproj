@@ -28,6 +28,7 @@
 		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
 		1F0053311953694600DF2708 /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053301953694600DF2708 /* ContextHub.framework */; };
 		1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053321953780F00DF2708 /* MapKit.framework */; };
+		1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1F0053301953694600DF2708 /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 		1F0053321953780F00DF2708 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLCircularRegion+ContextHub.h"; path = "Models/CLCircularRegion+ContextHub.h"; sourceTree = "<group>"; };
+		1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLCircularRegion+ContextHub.m"; path = "Models/CLCircularRegion+ContextHub.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +188,8 @@
 				1F005325195367F000DF2708 /* GFGeofence.m */,
 				1F0053271953680D00DF2708 /* GFGeofenceStore.h */,
 				1F0053281953680D00DF2708 /* GFGeofenceStore.m */,
+				1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */,
+				1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -249,6 +254,14 @@
 				TargetAttributes = {
 					1F0052E9195365BB00DF2708 = {
 						DevelopmentTeam = K83DSSAEPP;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					1F005304195365BB00DF2708 = {
 						TestTargetID = 1F0052E9195365BB00DF2708;
@@ -320,6 +333,7 @@
 				1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */,
 				1F0052FA195365BB00DF2708 /* main.m in Sources */,
 				1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */,
+				1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +540,7 @@
 				1F005318195365BB00DF2708 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F005319195365BB00DF2708 /* Build configuration list for PBXNativeTarget "GeofencesTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +549,7 @@
 				1F00531B195365BB00DF2708 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

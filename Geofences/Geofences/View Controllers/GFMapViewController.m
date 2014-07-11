@@ -13,6 +13,7 @@
 
 @interface GFMapViewController ()
 
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
 @end
@@ -34,8 +35,14 @@
     });
     
     
-    // Register to listen notifications about geofence sync being completed
+    // Register to listen to notifications about geofence sync being completed
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:(NSString *)GFGeofenceSyncCompletedNotification object:nil];
+    
+    // Register to listen to notifications about geofence entering or leaving
+    // Initialize location manager and get it to start updating our location
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,11 +110,18 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
-        GFGeofence *newGeofence = [[GFGeofence alloc] initWithCenter:self.mapView.userLocation.coordinate radius:50 identifier:name];
+        GFGeofence *newGeofence = [[GFGeofence alloc] initWithCenter:self.mapView.centerCoordinate radius:250 identifier:name];
         
         [[GFGeofenceStore sharedInstance] addGeofence:newGeofence];
         [self addGeofenceToMap:newGeofence];
     }
+}
+
+
+#pragma mark - Location Manager Methods 
+
+- (void)locationManager:manager didUpdateLocations:(NSArray *)locations {
+    [self.locationManager stopUpdatingLocation];
 }
 
 
