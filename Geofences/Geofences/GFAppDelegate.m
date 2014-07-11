@@ -23,10 +23,16 @@
     //Register the app id of the application you created on https://app.contexthub.com
     [ContextHub registerWithAppId:@"441ef227-6cd9-4a71-b1ab-0641dffa3744"];
     
+    
+    CCHSensorPipeline *sensorPipeline = [CCHSensorPipeline sharedInstance];
     //This tells ContextHub about the tags you will use to identify the Geofences that you want to automatically monitor.
-    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GFGeofenceTagName]]) {
+    if (![sensorPipeline addSubscriptionForTags:@[GFGeofenceTagName]]) {
         NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTagName);
     }
+    
+    //Set the app delegate as the Datasource and Delegate of the Sensor Pipeline so that we can tap into the events.
+    [sensorPipeline setDelegate:self];
+    [sensorPipeline setDataSource:self];
     
     return YES;
 }
