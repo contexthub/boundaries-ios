@@ -16,17 +16,58 @@
 {
     // Register with ContextHub
 #ifdef DEBUG
+    // This tells ContextHub that you are running a debug build.
     [[ContextHub sharedInstance] setDebug:TRUE];
 #endif
     
-    [ContextHub registerWithAppId:@"4e0aad2a-b052-42e0-93ee-6f024d11de10"];
+    //Register the app id of the application you created on https://app.contexthub.com
+    [ContextHub registerWithAppId:@"441ef227-6cd9-4a71-b1ab-0641dffa3744"];
     
+    //This tells ContextHub about the tags you will use to identify the Geofences that you want to automatically monitor.
     if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GFGeofenceTagName]]) {
         NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTagName);
     }
     
     return YES;
 }
+
+#pragma mark - CCHSensorPipelineDelegate
+
+/*
+ Sometimes you may want to keep an event from posting to the ContextHub service.  This method gives you the opportunity to stop the call.
+ If you return NO, none of the other delegate methods will get called, and the event will be discarded.
+*/
+- (BOOL)sensorPipeline:(CCHSensorPipeline *)sensorPipeline shouldPostEvent:(NSDictionary *)event {
+    NSLog(@"GH: Should post event %@", event);
+
+    return YES;
+}
+
+/*
+ Called before an event was sent to ContextHub.
+ */
+- (void)sensorPipeline:(CCHSensorPipeline *)sensorPipeline willPostEvent:(NSDictionary *)event {
+    NSLog(@"GH: Will post event %@", event);
+}
+
+/*
+ Called after an event was sent to ContextHub.
+ */
+- (void)sensorPipeline:(CCHSensorPipeline *)sensorPipeline didPostEvent:(NSDictionary *)event {
+    NSLog(@"GH: Did post event %@", event);
+}
+
+#pragma mark - CCHSensorPipelineDataSource
+
+/*
+ You can add custom data to the event before it gets sent to the ContextHub Server.
+ Return a serializable dictionary that will get added to context event payload property.
+ */
+- (NSDictionary *)sensorPipeline:(CCHSensorPipeline *)sensorPipeline payloadForEvent:(NSDictionary *)event {
+    return @{@"custom":@"data"};
+}
+
+#pragma mark - Application Lifecycle
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

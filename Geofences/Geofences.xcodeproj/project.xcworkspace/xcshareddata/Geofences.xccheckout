@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>70DF077A-AA6F-418C-BFBC-046C662A2E81</string>
+	<string>D825A184-D2CD-4CFB-9A36-78F0F71ADDA6</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Geofences</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>22D1B001-4784-4A5E-9D13-894263F3A414</key>
-		<string>ssh://github.com/contexthub/Geofences.git</string>
+		<key>A45E2E4D-0169-4B9A-B636-F6C272762F51</key>
+		<string>https://github.com/contexthub/geofences.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Geofences/Geofences.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>22D1B001-4784-4A5E-9D13-894263F3A414</key>
+		<key>A45E2E4D-0169-4B9A-B636-F6C272762F51</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/contexthub/Geofences.git</string>
+	<string>https://github.com/contexthub/geofences.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>22D1B001-4784-4A5E-9D13-894263F3A414</string>
+	<string>A45E2E4D-0169-4B9A-B636-F6C272762F51</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>22D1B001-4784-4A5E-9D13-894263F3A414</string>
+			<string>A45E2E4D-0169-4B9A-B636-F6C272762F51</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Geofences</string>
+			<string>geofences</string>
 		</dict>
 	</array>
 </dict>
