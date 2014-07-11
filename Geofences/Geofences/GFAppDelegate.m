@@ -21,10 +21,11 @@
 #endif
     
     //Register the app id of the application you created on https://app.contexthub.com
-    [ContextHub registerWithAppId:@"441ef227-6cd9-4a71-b1ab-0641dffa3744"];
+    [ContextHub registerWithAppId:@"YOUR-GEOFENCE-APP-ID-HERE"];
     
     
     CCHSensorPipeline *sensorPipeline = [CCHSensorPipeline sharedInstance];
+
     //This tells ContextHub about the tags you will use to identify the Geofences that you want to automatically monitor.
     if (![sensorPipeline addSubscriptionForTags:@[GFGeofenceTagName]]) {
         NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTagName);
