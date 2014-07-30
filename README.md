@@ -1,7 +1,7 @@
 # Geofences
 --
 
-The "Geofences" sample app that introduces you to the geofence features of the ContextHub iOS SDK and developer portal.
+The Geofences sample app that introduces you to the geofence features of the ContextHub iOS SDK and developer portal.
 
 ## Purpose
 This sample application will show you how to use Geofences to trigger events using the ContextHub iOS framework.
