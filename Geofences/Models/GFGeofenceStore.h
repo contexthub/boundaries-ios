@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString const *GFGeofenceTagName;
 extern NSString const *GFGeofenceSyncCompletedNotification;
 
 @class GFGeofence;

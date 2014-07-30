@@ -16,7 +16,16 @@ typedef NS_ENUM(NSInteger, CCHSensorPipelineErrorCode) {
     /**
      Synchronization timeout error code.
      */
-    CCHSensorPipelineTimeOutError = 0
+    CCHSensorPipelineTimeOutError,
+    /**
+     The custom event is nil.
+     */
+    CCHSensorPipelineMissingEventError,
+    /**
+     The custom event is missing a name key
+     */
+    CCHSensorPipelineMissingNameKeyError
+    
 };
 
 @class CCHSensorPipeline;
@@ -127,6 +136,14 @@ extern NSString * const CCHUntaggedElements;
  Returns the singleton instnace of the CCHSensorPipeline
  */
 + (instancetype)sharedInstance;
+
+/**
+ This method give you the ability to trigger custom events on the ContextHub sensor pipeline
+ @param event The event that you want to send to the server.
+ @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError wil be passed to the block.
+ @note The event must contain a name key.  If you want to pass contextual information along with the event, you can do so by setting a data key for the event.
+ */
+- (void)triggerEvent:(NSDictionary *)event completionHandeler:(void(^)(NSError *error))completionHandler;
 
 /**
  Calling synchronize will tell the SDK to check for server-side context changes and will update monitored regions.

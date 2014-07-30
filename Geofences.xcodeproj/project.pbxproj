@@ -27,6 +27,10 @@
 		1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532C195368C900DF2708 /* CoreMotion.framework */; };
 		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
 		1F0053331953780F00DF2708 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0053321953780F00DF2708 /* MapKit.framework */; };
+		1F17C98319892663009DDA11 /* ChaiOne.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C98219892663009DDA11 /* ChaiOne.gpx */; };
+		1F17C9851989266B009DDA11 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C9841989266B009DDA11 /* README.md */; };
+		1F17C9871989266E009DDA11 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C9861989266E009DDA11 /* release_notes.md */; };
+		1F17C98919892672009DDA11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C98819892672009DDA11 /* LICENSE */; };
 		1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */; };
 		3DCB100D19703F8B00F7591C /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCB100C19703F8B00F7591C /* ContextHub.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +73,11 @@
 		1F00532C195368C900DF2708 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1F0053321953780F00DF2708 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1F17C98219892663009DDA11 /* ChaiOne.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ChaiOne.gpx; sourceTree = "<group>"; };
+		1F17C9841989266B009DDA11 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1F17C9861989266E009DDA11 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		1F17C98819892672009DDA11 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1F17C98A19892B5B009DDA11 /* GFConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFConstants.h; sourceTree = "<group>"; };
 		1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLCircularRegion+ContextHub.h"; path = "Models/CLCircularRegion+ContextHub.h"; sourceTree = "<group>"; };
 		1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLCircularRegion+ContextHub.m"; path = "Models/CLCircularRegion+ContextHub.m"; sourceTree = "<group>"; };
 		3DCB100C19703F8B00F7591C /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
@@ -106,6 +115,9 @@
 		1F0052E1195365BB00DF2708 = {
 			isa = PBXGroup;
 			children = (
+				1F17C9841989266B009DDA11 /* README.md */,
+				1F17C9861989266E009DDA11 /* release_notes.md */,
+				1F17C98819892672009DDA11 /* LICENSE */,
 				1F0052F3195365BB00DF2708 /* Geofences */,
 				1F00530C195365BB00DF2708 /* GeofencesTests */,
 				1F0052EC195365BB00DF2708 /* Frameworks */,
@@ -145,7 +157,9 @@
 				1F0053201953677100DF2708 /* View Controllers */,
 				1F0052FC195365BB00DF2708 /* GFAppDelegate.h */,
 				1F0052FD195365BB00DF2708 /* GFAppDelegate.m */,
+				1F17C98A19892B5B009DDA11 /* GFConstants.h */,
 				1F0052FF195365BB00DF2708 /* Images.xcassets */,
+				1F17C98219892663009DDA11 /* ChaiOne.gpx */,
 				1F00531D1953666B00DF2708 /* Main.storyboard */,
 				1F0052F4195365BB00DF2708 /* Supporting Files */,
 			);
@@ -291,9 +305,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F17C9871989266E009DDA11 /* release_notes.md in Resources */,
 				1F0052F8195365BB00DF2708 /* InfoPlist.strings in Resources */,
 				1F005300195365BB00DF2708 /* Images.xcassets in Resources */,
+				1F17C98919892672009DDA11 /* LICENSE in Resources */,
+				1F17C9851989266B009DDA11 /* README.md in Resources */,
 				1F00531E1953666B00DF2708 /* Main.storyboard in Resources */,
+				1F17C98319892663009DDA11 /* ChaiOne.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

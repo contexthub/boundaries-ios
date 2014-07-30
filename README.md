@@ -1,4 +1,5 @@
 # Geofences
+--
 
 The "Geofences" sample app that introduces you to the geofence features of the ContextHub iOS SDK and developer portal.
 

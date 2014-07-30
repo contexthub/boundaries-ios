@@ -21,86 +21,46 @@
 #endif
     
     //Register the app id of the application you created on https://app.contexthub.com
-    [ContextHub registerWithAppId:@"YOUR-GEOFENCE-APP-ID-HERE"];
-    
-    
-    CCHSensorPipeline *sensorPipeline = [CCHSensorPipeline sharedInstance];
-
-    //This tells ContextHub about the tags you will use to identify the Geofences that you want to automatically monitor.
-    if (![sensorPipeline addSubscriptionForTags:@[GFGeofenceTagName]]) {
-        NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTagName);
-    }
+    //[ContextHub registerWithAppId:@"YOUR-GEOFENCE-APP-ID-HERE"];
+    [ContextHub registerWithAppId:@"4e0aad2a-b052-42e0-93ee-6f024d11de10"];
     
     //Set the app delegate as the Datasource and Delegate of the Sensor Pipeline so that we can tap into the events.
-    [sensorPipeline setDelegate:self];
-    [sensorPipeline setDataSource:self];
+    [[CCHSensorPipeline sharedInstance] setDelegate:self];
+    [[CCHSensorPipeline sharedInstance] setDataSource:self];
+    
+    //This tells ContextHub about the tags you will use to identify the Geofences that you want to automatically monitor.
+    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[GFGeofenceTag]]) {
+        NSLog(@"GF: Failed to add subscription to \"%@\" tag", GFGeofenceTag);
+    }
     
     return YES;
 }
 
-#pragma mark - CCHSensorPipelineDelegate
+#pragma mark - Sensor Pipeline Delegate
 
-/*
- Sometimes you may want to keep an event from posting to the ContextHub service.  This method gives you the opportunity to stop the call.
- If you return NO, none of the other delegate methods will get called, and the event will be discarded.
-*/
 - (BOOL)sensorPipeline:(CCHSensorPipeline *)sensorPipeline shouldPostEvent:(NSDictionary *)event {
+    // If you'd like to keep events from hitting the server, you can return NO here.
+    // This is a good spot to filter events.
     NSLog(@"GH: Should post event %@", event);
 
     return YES;
 }
 
-/*
- Called before an event was sent to ContextHub.
- */
 - (void)sensorPipeline:(CCHSensorPipeline *)sensorPipeline willPostEvent:(NSDictionary *)event {
+    // If you want to access event data directl before it will be posted to the server, you can do that here
     NSLog(@"GH: Will post event %@", event);
 }
 
-/*
- Called after an event was sent to ContextHub.
- */
 - (void)sensorPipeline:(CCHSensorPipeline *)sensorPipeline didPostEvent:(NSDictionary *)event {
+    // If you want to access event data directly after it has been posted to the server, you can do that here
     NSLog(@"GH: Did post event %@", event);
 }
 
-#pragma mark - CCHSensorPipelineDataSource
+#pragma mark - Sensor Pipeline Data Source
 
-/*
- You can add custom data to the event before it gets sent to the ContextHub Server.
- Return a serializable dictionary that will get added to context event payload property.
- */
 - (NSDictionary *)sensorPipeline:(CCHSensorPipeline *)sensorPipeline payloadForEvent:(NSDictionary *)event {
+    // Add custom data structures to the events, and they will end up on the server in the payload property
     return @{@"custom":@"data"};
-}
-
-#pragma mark - Application Lifecycle
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end

@@ -8,8 +8,8 @@
 
 #import "GFMapViewController.h"
 
-#import "GFGeofenceStore.h"
 #import "GFGeofence.h"
+#import "GFGeofenceStore.h"
 
 @interface GFMapViewController ()
 
@@ -34,7 +34,6 @@
         [[GFGeofenceStore sharedInstance] syncGeofences];
     });
     
-    
     // Register to listen to notifications about geofence sync being completed
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:(NSString *)GFGeofenceSyncCompletedNotification object:nil];
     
@@ -51,6 +50,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Geofences
+
+// Adds a geofence to the map
 - (void)addGeofenceToMap:(GFGeofence *)geofence {
     // Add the pin
     MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
@@ -66,10 +68,29 @@
     NSLog(@"GF Map View: Added \"%@\" geofence to map", geofence.identifier);
 }
 
+// Removes a geofence from the map
 - (void)removeGeofenceFromMap:(GFGeofence *)geofence {
     
+    // Loop through all annotations to find our geofence pin to remove
+    for (MKPointAnnotation *pin in self.mapView.annotations) {
+        
+        // Check if latitude and longitude match
+        if ((pin.coordinate.latitude == geofence.center.latitude) && (pin.coordinate.longitude == geofence.center.longitude)) {
+            [self.mapView removeAnnotation:pin];
+        }
+    }
+    
+    // Loop through all overlays to find our geofence circle to remove
+    for (MKCircle *circle in self.mapView.overlays) {
+        
+        // Check if latitude and longitude match
+        if ((circle.coordinate.latitude == geofence.center.latitude) && (circle.coordinate.longitude == geofence.center.longitude)) {
+            [self.mapView removeOverlay:circle];
+        }
+    }
 }
 
+// Adds all geofences to the map
 - (void)addAllGeofences {
     NSArray *geofences = [GFGeofenceStore sharedInstance].geofenceArray;
     
@@ -78,6 +99,7 @@
     }
 }
 
+// Removes all geofences from the map
 - (void)removeAllGeofences {
     id userLocation = [self.mapView userLocation];
     NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
@@ -92,14 +114,16 @@
 
 #pragma mark - Actions
 
+// Pop an alert for the name of the geofence
 - (IBAction)addGeofenceAction:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Entier name" message:@"What is the name of your geofence?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter name" message:@"What is the name of your geofence?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
 }
 
 #pragma mark - Events 
 
+// Respond to synchronization finishing by removing and adding all geofences
 - (void)syncCompleted:(NSNotification *)notification {
     [self removeAllGeofences];
     [self addAllGeofences];
@@ -107,6 +131,7 @@
 
 #pragma mark - Alert View Methods
 
+// Add the geofence to the geofence store
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
@@ -117,28 +142,36 @@
     }
 }
 
-
 #pragma mark - Location Manager Methods 
 
+// Only update location once
 - (void)locationManager:manager didUpdateLocations:(NSArray *)locations {
-    [self.locationManager stopUpdatingLocation];
+    
+    // The location manager will update with null data (0, 0) until the Apple Location Services gets a fix
+    if (!(self.locationManager.location.coordinate.latitude == 0 && self.locationManager.location.coordinate.longitude == 0)) {
+        // Set the map to where the user is located currently, and turn on tracking mode.
+        MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 1500, 1500);
+        [self.mapView setRegion:newRegion animated:YES];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
+        
+        [self.locationManager stopUpdatingLocation];
+    }
 }
-
 
 #pragma mark - Map View Methods
 
+// Draws a circle on a map which represents a geofence
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay{
     if ([overlay isKindOfClass:[MKCircle class]]) {
-        // Draw the circle on the map how we want it (cyan inside with blue border)
+        // Draw the circle on the map how we want it (light blue inside with blue border)
         MKCircleRenderer* aRenderer = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
         
-        aRenderer.fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        aRenderer.fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.1];
         aRenderer.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
         aRenderer.lineWidth = 3;
         return aRenderer;
     }
     return nil;
 }
-
 
 @end

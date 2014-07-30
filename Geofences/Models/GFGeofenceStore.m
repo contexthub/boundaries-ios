@@ -10,7 +10,6 @@
 #import "GFGeofence.h"
 #import <ContextHub/ContextHub.h>
 
-NSString const *GFGeofenceTagName = @"geofences";
 NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedNotification";
 
 @interface GFGeofenceStore ()
@@ -41,10 +40,9 @@ NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedN
     return self;
 }
 
+// Synchronizes geofences in ContextHub
 - (void)syncGeofences {
-
-
-    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTagName] location:nil radius:1000 completionHandler:^(NSArray *geofences, NSError *error) {
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTag] location:nil radius:1000 completionHandler:^(NSArray *geofences, NSError *error) {
         if (!error) {
             NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
@@ -63,24 +61,35 @@ NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedN
     }];
 }
 
+// Creates a geofence in ContextHub and keeps a copy in our store
 - (void)addGeofence:(GFGeofence *)fence {
     // Add geofence to our array
     [self.geofenceArray addObject:fence];
     
-    __block GFGeofence *__fence = fence;
     // Create it in ContextHub
-    [[CCHGeofenceService sharedInstance] createGeofenceWithCenter:fence.center radius:fence.radius name:fence.identifier tags:@[GFGeofenceTagName] completionHandler:^(NSDictionary *geofence, NSError *error) {
+    __block GFGeofence *__fence = fence;
+    [[CCHGeofenceService sharedInstance] createGeofenceWithCenter:fence.center radius:fence.radius name:fence.identifier tags:@[GFGeofenceTag] completionHandler:^(NSDictionary *geofence, NSError *error) {
+        
         if (!error) {
             __fence.geofenceID = (NSInteger)geofence[@"id"];
             __fence.tags = geofence[@"tags"];
-            NSLog(@"GF: Successfully created geofence %@ on ContextHub", fence.identifier);
+            
+            // Synchronize the sensor pipeline with ContextHub (if you have push set up correctly, you can skip this step!)
+            [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
+                
+                if (!error) {
+                    NSLog(@"GF: Successfully created geofence %@ on ContextHub", fence.identifier);
+                } else {
+                    NSLog(@"GF: Could not synchronize creation of geofence %@ on ContextHub", fence.identifier);
+                }
+            }];
         } else {
             NSLog(@"GF: Could not create geofence %@ on ContextHub", fence.identifier);
         }
     }];
 }
 
-
+// Delete a geofence in ContextHub and remove it from our store
 - (void)removeGeofence:(GFGeofence *)geofence {
     // Remove geofence from our array
     if ([self.geofenceArray containsObject:geofence]) {
@@ -91,7 +100,16 @@ NSString const *GFGeofenceSyncCompletedNotification = @"GFGeofenceSyncCompletedN
     // Remove geofence from ContextHub
     [[CCHGeofenceService sharedInstance] deleteGeofence:geofenceDict completionHandler:^(NSError *error) {
         if (!error) {
-            NSLog(@"GF: Successfully deleted geofence %@ on ContextHub", geofence.identifier);
+            
+            // Synchronize the sensor pipeline with ContextHub (if you have push set up correctly, you can skip this step!)
+            [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
+                
+                if (!error) {
+                    NSLog(@"GF: Successfully deleted geofence %@ on ContextHub", geofence.identifier);
+                } else {
+                    NSLog(@"GF: Could not synchronize deletion of geofence %@ on ContextHub", geofence.identifier);
+                }
+            }];
         } else {
             NSLog(@"GF: Could not delete geofence %@ on ContextHub", geofence.identifier);
         }

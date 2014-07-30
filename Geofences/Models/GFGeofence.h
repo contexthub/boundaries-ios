@@ -11,7 +11,7 @@
 @interface GFGeofence : CLCircularRegion
 
 @property (nonatomic) NSInteger geofenceID;
-@property (nonatomic, strong) NSArray *tags;
+@property (nonatomic, copy) NSArray *tags;
 
 - (instancetype)initFromDictionary:(NSDictionary *)geofenceDict;
 + (NSDictionary *)dictionaryForGeofence:(GFGeofence *)geofence;
