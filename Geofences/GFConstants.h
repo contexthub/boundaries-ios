@@ -9,6 +9,6 @@
 #ifndef Geofences_GFConstants_h
 #define Geofences_GFConstants_h
 
-static NSString const *GFGeofenceTag = @"geofences";
+static NSString const *GFGeofenceTag = @"geofence-tag";
 
 #endif

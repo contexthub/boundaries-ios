@@ -20,7 +20,6 @@
 		1F005311195365BB00DF2708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F00530F195365BB00DF2708 /* InfoPlist.strings */; };
 		1F005313195365BB00DF2708 /* GeofencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005312195365BB00DF2708 /* GeofencesTests.m */; };
 		1F00531E1953666B00DF2708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F00531D1953666B00DF2708 /* Main.storyboard */; };
-		1F005323195367C900DF2708 /* GFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005322195367C900DF2708 /* GFMapViewController.m */; };
 		1F005326195367F000DF2708 /* GFGeofence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005325195367F000DF2708 /* GFGeofence.m */; };
 		1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0053281953680D00DF2708 /* GFGeofenceStore.m */; };
 		1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532A195368C200DF2708 /* CoreLocation.framework */; };
@@ -32,6 +31,11 @@
 		1F17C9871989266E009DDA11 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C9861989266E009DDA11 /* release_notes.md */; };
 		1F17C98919892672009DDA11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1F17C98819892672009DDA11 /* LICENSE */; };
 		1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */; };
+		1F914F86198D846A00E2C6A7 /* GFGeofenceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F914F85198D846A00E2C6A7 /* GFGeofenceCell.m */; };
+		1F914F8D198D901F00E2C6A7 /* GFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F914F8C198D901F00E2C6A7 /* GFTabBarController.m */; };
+		1F914F92198D90A300E2C6A7 /* GFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F914F8F198D90A300E2C6A7 /* GFMapViewController.m */; };
+		1F914F93198D90A300E2C6A7 /* GFListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F914F91198D90A300E2C6A7 /* GFListTableViewController.m */; };
+		1F914F96198D964000E2C6A7 /* GFAboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F914F95198D964000E2C6A7 /* GFAboutTableViewController.m */; };
 		3DCB100D19703F8B00F7591C /* ContextHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCB100C19703F8B00F7591C /* ContextHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +67,6 @@
 		1F005310195365BB00DF2708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1F005312195365BB00DF2708 /* GeofencesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeofencesTests.m; sourceTree = "<group>"; };
 		1F00531D1953666B00DF2708 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		1F005321195367C900DF2708 /* GFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFMapViewController.h; path = "View Controllers/GFMapViewController.h"; sourceTree = "<group>"; };
-		1F005322195367C900DF2708 /* GFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFMapViewController.m; path = "View Controllers/GFMapViewController.m"; sourceTree = "<group>"; };
 		1F005324195367F000DF2708 /* GFGeofence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofence.h; path = Models/GFGeofence.h; sourceTree = "<group>"; };
 		1F005325195367F000DF2708 /* GFGeofence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofence.m; path = Models/GFGeofence.m; sourceTree = "<group>"; };
 		1F0053271953680D00DF2708 /* GFGeofenceStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofenceStore.h; path = Models/GFGeofenceStore.h; sourceTree = "<group>"; };
@@ -80,6 +82,16 @@
 		1F17C98A19892B5B009DDA11 /* GFConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFConstants.h; sourceTree = "<group>"; };
 		1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLCircularRegion+ContextHub.h"; path = "Models/CLCircularRegion+ContextHub.h"; sourceTree = "<group>"; };
 		1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLCircularRegion+ContextHub.m"; path = "Models/CLCircularRegion+ContextHub.m"; sourceTree = "<group>"; };
+		1F914F84198D846A00E2C6A7 /* GFGeofenceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofenceCell.h; path = Views/GFGeofenceCell.h; sourceTree = "<group>"; };
+		1F914F85198D846A00E2C6A7 /* GFGeofenceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofenceCell.m; path = Views/GFGeofenceCell.m; sourceTree = "<group>"; };
+		1F914F8B198D901F00E2C6A7 /* GFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFTabBarController.h; path = "View Controllers/GFTabBarController.h"; sourceTree = "<group>"; };
+		1F914F8C198D901F00E2C6A7 /* GFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFTabBarController.m; path = "View Controllers/GFTabBarController.m"; sourceTree = "<group>"; };
+		1F914F8E198D90A300E2C6A7 /* GFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFMapViewController.h; path = "View Controllers/Tabs/GFMapViewController.h"; sourceTree = "<group>"; };
+		1F914F8F198D90A300E2C6A7 /* GFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFMapViewController.m; path = "View Controllers/Tabs/GFMapViewController.m"; sourceTree = "<group>"; };
+		1F914F90198D90A300E2C6A7 /* GFListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFListTableViewController.h; path = "View Controllers/Tabs/GFListTableViewController.h"; sourceTree = "<group>"; };
+		1F914F91198D90A300E2C6A7 /* GFListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFListTableViewController.m; path = "View Controllers/Tabs/GFListTableViewController.m"; sourceTree = "<group>"; };
+		1F914F94198D964000E2C6A7 /* GFAboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFAboutTableViewController.h; path = "View Controllers/Tabs/GFAboutTableViewController.h"; sourceTree = "<group>"; };
+		1F914F95198D964000E2C6A7 /* GFAboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFAboutTableViewController.m; path = "View Controllers/Tabs/GFAboutTableViewController.m"; sourceTree = "<group>"; };
 		3DCB100C19703F8B00F7591C /* ContextHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextHub.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				1F00531F1953676600DF2708 /* Models */,
+				1F914F83198D845000E2C6A7 /* Views */,
 				1F0053201953677100DF2708 /* View Controllers */,
+				1F914F87198D8E2900E2C6A7 /* Utilities */,
 				1F0052FC195365BB00DF2708 /* GFAppDelegate.h */,
 				1F0052FD195365BB00DF2708 /* GFAppDelegate.m */,
 				1F17C98A19892B5B009DDA11 /* GFConstants.h */,
@@ -202,8 +216,6 @@
 				1F005325195367F000DF2708 /* GFGeofence.m */,
 				1F0053271953680D00DF2708 /* GFGeofenceStore.h */,
 				1F0053281953680D00DF2708 /* GFGeofenceStore.m */,
-				1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */,
-				1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -211,10 +223,50 @@
 		1F0053201953677100DF2708 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1F005321195367C900DF2708 /* GFMapViewController.h */,
-				1F005322195367C900DF2708 /* GFMapViewController.m */,
+				1F914F89198D8FF500E2C6A7 /* Tabs */,
+				1F914F8B198D901F00E2C6A7 /* GFTabBarController.h */,
+				1F914F8C198D901F00E2C6A7 /* GFTabBarController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1F914F83198D845000E2C6A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F914F84198D846A00E2C6A7 /* GFGeofenceCell.h */,
+				1F914F85198D846A00E2C6A7 /* GFGeofenceCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1F914F87198D8E2900E2C6A7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1F914F88198D8E2F00E2C6A7 /* Categories */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		1F914F88198D8E2F00E2C6A7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1F6F598B1953986B0079D937 /* CLCircularRegion+ContextHub.h */,
+				1F6F598C1953986B0079D937 /* CLCircularRegion+ContextHub.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		1F914F89198D8FF500E2C6A7 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				1F914F8E198D90A300E2C6A7 /* GFMapViewController.h */,
+				1F914F8F198D90A300E2C6A7 /* GFMapViewController.m */,
+				1F914F90198D90A300E2C6A7 /* GFListTableViewController.h */,
+				1F914F91198D90A300E2C6A7 /* GFListTableViewController.m */,
+				1F914F94198D964000E2C6A7 /* GFAboutTableViewController.h */,
+				1F914F95198D964000E2C6A7 /* GFAboutTableViewController.m */,
+			);
+			name = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,11 +398,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F914F8D198D901F00E2C6A7 /* GFTabBarController.m in Sources */,
 				1F005326195367F000DF2708 /* GFGeofence.m in Sources */,
-				1F005323195367C900DF2708 /* GFMapViewController.m in Sources */,
+				1F914F92198D90A300E2C6A7 /* GFMapViewController.m in Sources */,
 				1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */,
+				1F914F86198D846A00E2C6A7 /* GFGeofenceCell.m in Sources */,
 				1F0052FA195365BB00DF2708 /* main.m in Sources */,
 				1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */,
+				1F914F93198D90A300E2C6A7 /* GFListTableViewController.m in Sources */,
+				1F914F96198D964000E2C6A7 /* GFAboutTableViewController.m in Sources */,
 				1F6F598D1953986B0079D937 /* CLCircularRegion+ContextHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
