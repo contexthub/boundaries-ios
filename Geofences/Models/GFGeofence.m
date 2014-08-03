@@ -8,29 +8,42 @@
 
 #import "GFGeofence.h"
 
+@interface GFGeofence()
+@property (nonatomic, strong) NSMutableDictionary *geofenceDict;
+@end
+
 @implementation GFGeofence
 
-- (instancetype)initFromDictionary:(NSDictionary *)geofenceDict {
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     // Pull the data out of the dictionary to create a CLCircularRegion
-    CLLocationDegrees lat = [geofenceDict[@"latitude"] doubleValue];
-    CLLocationDegrees lng = [geofenceDict[@"longitude"] doubleValue];
+    CLLocationDegrees lat = [dictionary[@"latitude"] doubleValue];
+    CLLocationDegrees lng = [dictionary[@"longitude"] doubleValue];
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(lat, lng);
-    CLLocationDistance radius = [geofenceDict[@"radius"] doubleValue];
-    NSString *identifier = geofenceDict[@"name"];
+    CLLocationDistance radius = [dictionary[@"radius"] doubleValue];
+    NSString *identifier = dictionary[@"name"];
     self = [super initWithCenter:center radius:radius identifier:identifier];
     
     if (self) {
-        _geofenceID = [geofenceDict[@"id"] integerValue];
-        _tags = geofenceDict[@"tags"];
+        _geofenceID = [NSString stringWithFormat:@"%ld", (long)[dictionary[@"id"] integerValue]];
+        _name = dictionary[@"name"];
+        _tags = dictionary[@"tags"];
+        
+        // Make a mutable copy which dictionaryForGeofence will update
+        _geofenceDict = [dictionary mutableCopy];
     }
     
     return self;
 }
 
-+ (NSDictionary *)dictionaryForGeofence:(GFGeofence *)geofence {
-    NSDictionary *geofenceDict = @{@"id":[NSNumber numberWithInt:geofence.geofenceID], @"name":geofence.identifier, @"latitude":[NSNumber numberWithDouble:geofence.center.latitude], @"longitude":[NSNumber numberWithDouble:geofence.center.longitude], @"radius":[NSNumber numberWithDouble:geofence.radius], @"tags":geofence.tags};
+- (NSDictionary *)dictionaryForGeofence {
+    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.center.latitude] forKey:@"latitude"];
+    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.center.longitude] forKey:@"longitude"];
+    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.radius] forKey:@"radius"];
+    [self.geofenceDict setValue:self.name forKey:@"name"];
     
-    return geofenceDict;
+    [self.geofenceDict setValue:self.tags forKey:@"tags"];
+    
+    return self.geofenceDict;
 }
 
 @end

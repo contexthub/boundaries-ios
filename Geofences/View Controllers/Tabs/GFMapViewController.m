@@ -11,6 +11,8 @@
 #import "GFGeofence.h"
 #import "GFGeofenceStore.h"
 
+#import "CLCircularRegion+ContextHub.h"
+
 @interface GFMapViewController ()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -30,9 +32,7 @@
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
     
     // Do initial data sync
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[GFGeofenceStore sharedInstance] syncGeofences];
-    });
+    [[GFGeofenceStore sharedInstance] syncGeofences];
     
     // Register to listen to notifications about geofence sync being completed
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:(NSString *)GFGeofenceSyncCompletedNotification object:nil];
@@ -42,6 +42,16 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // Register to listen to notification about sensor pipeline posting events
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    // Stop listening to notifications about sensor pipeline events
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CCHSensorPipelineDidPostEvent object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,15 +67,22 @@
     // Add the pin
     MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
     pin.coordinate = geofence.center;
-    pin.title = geofence.identifier;
+    pin.title = geofence.name;
     pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
     [self.mapView addAnnotation:pin];
     
     // Add the circle indicating radius
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
     [self.mapView addOverlay:circle];
+}
+
+// Adds all geofences to the map
+- (void)addAllGeofencesToMap {
+    NSArray *geofences = [GFGeofenceStore sharedInstance].geofences;
     
-    NSLog(@"GF Map View: Added \"%@\" geofence to map", geofence.identifier);
+    for (GFGeofence *geofence in geofences) {
+        [self addGeofenceToMap:geofence];
+    }
 }
 
 // Removes a geofence from the map
@@ -90,17 +107,8 @@
     }
 }
 
-// Adds all geofences to the map
-- (void)addAllGeofences {
-    NSArray *geofences = [GFGeofenceStore sharedInstance].geofenceArray;
-    
-    for (GFGeofence *geofence in geofences) {
-        [self addGeofenceToMap:geofence];
-    }
-}
-
 // Removes all geofences from the map
-- (void)removeAllGeofences {
+- (void)removeAllGeofencesFromMap {
     id userLocation = [self.mapView userLocation];
     NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
     if (userLocation != nil) {
@@ -116,17 +124,39 @@
 
 // Pop an alert for the name of the geofence
 - (IBAction)addGeofenceAction:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter name" message:@"What is the name of your geofence?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Create Geofence" message:@"Enter the name of your new geofence:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
 }
 
 #pragma mark - Events 
 
+// Handle an event from ContextHub
+- (void)handleEvent:(NSNotification *)notification {
+    NSDictionary *event = notification.object;
+    
+    // Check and make sure its a geofence event
+    if ([event valueForKeyPath:CCHGeofenceEventKeyPath]) {
+        // Get the name of the geofence from the ID, look inside our store
+        NSString *fenceID = [event valueForKeyPath:CCHGeofenceEventIDKeyPath];
+        GFGeofence *geofence = [[GFGeofenceStore sharedInstance] findGeofenceInStoreWithID:fenceID];
+        
+        // Check and see if we know about this geofence
+        if (geofence) {
+            
+            if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHGeofenceInEvent) {
+                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have entered %@", geofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+            } else if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHGeofenceOutEvent)  {
+                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have left %@", geofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+            }
+        }
+    }
+}
+
 // Respond to synchronization finishing by removing and adding all geofences
 - (void)syncCompleted:(NSNotification *)notification {
-    [self removeAllGeofences];
-    [self addAllGeofences];
+    [self removeAllGeofencesFromMap];
+    [self addAllGeofencesToMap];
 }
 
 #pragma mark - Alert View Methods
@@ -135,10 +165,18 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
-        GFGeofence *newGeofence = [[GFGeofence alloc] initWithCenter:self.mapView.centerCoordinate radius:250 identifier:name];
         
-        [[GFGeofenceStore sharedInstance] addGeofence:newGeofence];
-        [self addGeofenceToMap:newGeofence];
+        // Create the geofence
+        [[GFGeofenceStore sharedInstance] createGeofenceWithCenter:self.mapView.centerCoordinate radius:250 name:name completionHandler:^(GFGeofence *geofence, NSError *error) {
+            
+            if (!error) {
+                // Add it to our map
+                [self addGeofenceToMap:geofence];
+            } else {
+                // There was an error creating the geofence
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"There was a problem creating your %@ geofence in ContextHub", name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+            }
+        }];
     }
 }
 
@@ -162,6 +200,7 @@
 
 // Draws a circle on a map which represents a geofence
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay{
+    
     if ([overlay isKindOfClass:[MKCircle class]]) {
         // Draw the circle on the map how we want it (light blue inside with blue border)
         MKCircleRenderer* aRenderer = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];

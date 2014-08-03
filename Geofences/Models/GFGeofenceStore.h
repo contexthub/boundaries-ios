@@ -14,12 +14,14 @@ extern NSString const *GFGeofenceSyncCompletedNotification;
 
 @interface GFGeofenceStore : NSObject
 
-@property (nonatomic, strong, readonly) NSMutableArray *geofenceArray;
+@property (nonatomic, strong, readonly) NSMutableArray *geofences;
 
 + (GFGeofenceStore *)sharedInstance;
 
+- (void)createGeofenceWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius name:(NSString *)name completionHandler:(void (^)(GFGeofence *geofence, NSError *error))completionHandler;
 - (void)syncGeofences;
-- (void)addGeofence:(GFGeofence *)geofence;
-- (void)removeGeofence:(GFGeofence *)geofence;
+- (GFGeofence *)findGeofenceInStoreWithID:(NSString *)geofenceID;
+- (void)updateGeofence:(GFGeofence *)geofence completionHandler:(void (^)(NSError *error))completionHandler;
+- (void)deleteGeofence:(GFGeofence *)geofence completionHandler:(void (^)(NSError *error))completionHandler;
 
 @end

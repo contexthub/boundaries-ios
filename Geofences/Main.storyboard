@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="hyv-LN-Vyl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="wnh-zH-Ekz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller - Geofences-->
+        <!--Map-->
         <scene sceneID="wEQ-Se-6db">
             <objects>
                 <viewController id="1jg-zy-3iM" customClass="GFMapViewController" sceneMemberID="viewController">
@@ -18,7 +19,6 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-GI-D3C">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="1jg-zy-3iM" id="Zt9-BR-o9d"/>
                                 </connections>
@@ -26,7 +26,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Geofences" id="fKS-Rv-Luo">
+                    <navigationItem key="navigationItem" title="Map" id="fKS-Rv-Luo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sPC-rd-yEO">
                             <connections>
                                 <action selector="addGeofenceAction:" destination="1jg-zy-3iM" id="ycT-rK-knV"/>
@@ -39,12 +39,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Og6-7S-LJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="710" y="-29"/>
+            <point key="canvasLocation" x="1242" y="-29"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Map-->
         <scene sceneID="kpt-dY-1Bk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hyv-LN-Vyl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="MapTabBarIcon" id="ely-OV-unY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LF1-hy-c7g">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -57,12 +58,153 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8OZ-pa-TgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="184" y="-29"/>
+            <point key="canvasLocation" x="716" y="-29"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="ZOG-YV-FCX">
+            <objects>
+                <tableViewController id="kp0-s6-F5L" customClass="GFListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ce8-n7-meF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GFGeofenceCellIdentifier" textLabel="56U-Rh-LWE" detailTextLabel="aIM-sO-Mgx" style="IBUITableViewCellStyleSubtitle" id="sR5-v6-EwY" customClass="GFGeofenceCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sR5-v6-EwY" id="7AE-Ha-52C">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="56U-Rh-LWE">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aIM-sO-Mgx">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="infoLabel" destination="aIM-sO-Mgx" id="ISO-NT-2gV"/>
+                                    <outlet property="nameLabel" destination="56U-Rh-LWE" id="OZ7-GJ-uRu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kp0-s6-F5L" id="w7Q-py-pEj"/>
+                            <outlet property="delegate" destination="kp0-s6-F5L" id="bJj-9c-Lbn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="List" id="a5L-TL-wt5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dp7-Vp-fvE">
+                            <connections>
+                                <action selector="toggleEditing:" destination="kp0-s6-F5L" id="sCi-i9-o58"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DJE-5Q-xbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1242" y="664"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="X00-WX-jMt">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wnh-zH-Ekz" customClass="GFTabBarController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="kNf-De-3ap">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="hyv-LN-Vyl" kind="relationship" relationship="viewControllers" id="VrM-aq-UMj"/>
+                        <segue destination="quk-7V-Icr" kind="relationship" relationship="viewControllers" id="WkS-VY-bba"/>
+                        <segue destination="H97-zV-p3m" kind="relationship" relationship="viewControllers" id="M33-ap-3gC"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nm2-FA-ImI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="190" y="664"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="ho2-AD-QJ1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="quk-7V-Icr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="ListTabBarIcon" id="B90-ac-XZL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sp9-XB-zlB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kp0-s6-F5L" kind="relationship" relationship="rootViewController" id="xJ5-Si-Dbj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t5g-s6-kx7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="716" y="664"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="tWg-zk-E6L">
+            <objects>
+                <tableViewController id="5VG-CB-vt2" customClass="GFAboutTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Vmh-W7-X18">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.45098039220000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="zEz-q4-Ami">
+                                <cells/>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="5VG-CB-vt2" id="rDB-YH-alq"/>
+                            <outlet property="delegate" destination="5VG-CB-vt2" id="Ea4-Ox-eyA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="About" id="1D5-xK-6tF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RCh-IE-mJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1242" y="1343"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="fXW-9a-jkT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H97-zV-p3m" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" image="AboutTabBarIcon" id="QsA-Nc-YCk"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Ad-sZ-Rtj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5VG-CB-vt2" kind="relationship" relationship="rootViewController" id="ddk-ub-BCd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O0e-vV-x0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="716" y="1343"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AboutTabBarIcon" width="28" height="28"/>
+        <image name="ListTabBarIcon" width="28" height="22"/>
+        <image name="MapTabBarIcon" width="28" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>
