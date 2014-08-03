@@ -52,7 +52,7 @@ In this sample application, we use ContextHub to CRUD geofences on the server th
 
 ## Code
 
-In this sample, most of the important code that deals with CRUDing geofences occurs in GFGeofenceStore.m. Each method goes though a single operation you'll need to use `CCHGeofenceService`. After each CUD operation, a synchronization call is made so that `CCHSensorPipeline` is up to date with the latest data. This method becomes unnecessary if you have properly implemented push as background notifications will take care of synchronization for you. When updating a 
+In this sample, most of the important code that deals with CRUDing geofences occurs in GFGeofenceStore.m. Each method goes though a single operation you'll need to use `CCHGeofenceService`. After each CUD operation, a synchronization call is made so that `CCHSensorPipeline` is up to date with the latest data. This method becomes unnecessary if you have properly implemented push as background notifications will take care of synchronization for you.
 
 In addition, `GFMapViewController` responds to any events created from the sensor pipeline through the `CCHSensorPipelineDidPostEvent` notification. At that point, you'll be able to filter whether the event was a geofence event which you were interested in and respond accordingly. There are several pre-defined keys that let you access information stored in an event, such as event name, state, type, etc..
 
