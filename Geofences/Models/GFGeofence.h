@@ -15,6 +15,5 @@
 @property (nonatomic, copy) NSArray *tags;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *)dictionaryForGeofence;
 
 @end

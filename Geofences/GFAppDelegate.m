@@ -8,8 +8,6 @@
 
 #import "GFAppDelegate.h"
 
-#import "GFGeofenceStore.h"
-
 @implementation GFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -9,7 +9,7 @@
 #import "GFMapViewController.h"
 
 #import "GFGeofence.h"
-#import "GFGeofenceStore.h"
+#import "GFConstants.h"
 
 #import "CLCircularRegion+ContextHub.h"
 
@@ -31,13 +31,11 @@
     [self.mapView setRegion:newRegion animated:YES];
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
     
-    // Do initial data sync
-    [[GFGeofenceStore sharedInstance] syncGeofences];
-    
-    // Register to listen to notifications about geofence sync being completed
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:(NSString *)GFGeofenceSyncCompletedNotification object:nil];
+    self.geofenceArray = [NSMutableArray array];
     
     // Register to listen to notifications about geofence entering or leaving
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
+    
     // Initialize location manager and get it to start updating our location
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -45,22 +43,44 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    // Register to listen to notification about sensor pipeline posting events
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    // Stop listening to notifications about sensor pipeline events
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CCHSensorPipelineDidPostEvent object:nil];
+    // Refresh all geofences
+    [self refreshGeofences];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Geofences
+
+// Refresh all geofences on the map
+- (void)refreshGeofences {
+    // If you have a location and particular radius of geofences you are interested in, you can fill those parameters to get back a smaller data set
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTag] location:nil radius:0 completionHandler:^(NSArray *geofences, NSError *error) {
+        
+        if (!error) {
+            NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
+            
+            [self.geofenceArray removeAllObjects];
+            
+            for (NSDictionary *geofenceDict in geofences) {
+                GFGeofence *geofence = [[GFGeofence alloc] initWithDictionary:geofenceDict];
+                [self.geofenceArray addObject:geofence];
+            }
+            
+            // Remove and re-add all geofences onto the map
+            [self removeAllGeofencesFromMap];
+            [self addAllGeofencesToMap];
+        } else {
+            NSLog(@"GF: Could not sync geofences with ContextHub");
+        }
+    }];
+}
+
+#pragma mark - Map
 
 // Adds a geofence to the map
 - (void)addGeofenceToMap:(GFGeofence *)geofence {
@@ -78,9 +98,7 @@
 
 // Adds all geofences to the map
 - (void)addAllGeofencesToMap {
-    NSArray *geofences = [GFGeofenceStore sharedInstance].geofences;
-    
-    for (GFGeofence *geofence in geofences) {
+    for (GFGeofence *geofence in self.geofenceArray) {
         [self addGeofenceToMap:geofence];
     }
 }
@@ -139,25 +157,29 @@
     if ([event valueForKeyPath:CCHGeofenceEventKeyPath]) {
         // Get the name of the geofence from the ID, look inside our store
         NSString *fenceID = [event valueForKeyPath:CCHGeofenceEventIDKeyPath];
-        GFGeofence *geofence = [[GFGeofenceStore sharedInstance] findGeofenceInStoreWithID:fenceID];
         
-        // Check and see if we know about this geofence
-        if (geofence) {
+        // Find the geofence we are interested in (if it exists)
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.geofenceID like %@", fenceID];
+        NSArray *filteredGeofences = [self.geofenceArray filteredArrayUsingPredicate:predicate];
+        
+        GFGeofence *foundGeofence = nil;
+        if ([filteredGeofences count] > 0) {
+            foundGeofence = filteredGeofences[0];
+        }
+        
+        // Check and see if we know about this found geofence
+        if (foundGeofence) {
             
             if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHGeofenceInEvent) {
-                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have entered %@", geofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have entered %@", foundGeofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             } else if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHGeofenceOutEvent)  {
-                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have left %@", geofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"ContextHub" message:[NSString stringWithFormat:@"You have left %@", foundGeofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             }
         }
     }
 }
 
-// Respond to synchronization finishing by removing and adding all geofences
-- (void)syncCompleted:(NSNotification *)notification {
-    [self removeAllGeofencesFromMap];
-    [self addAllGeofencesToMap];
-}
+
 
 #pragma mark - Alert View Methods
 
@@ -167,14 +189,28 @@
         NSString *name = [alertView textFieldAtIndex:0].text;
         
         // Create the geofence
-        [[GFGeofenceStore sharedInstance] createGeofenceWithCenter:self.mapView.centerCoordinate radius:250 name:name completionHandler:^(GFGeofence *geofence, NSError *error) {
+        [[CCHGeofenceService sharedInstance] createGeofenceWithCenter:self.mapView.centerCoordinate radius:250 name:name tags:@[GFGeofenceTag] completionHandler:^(NSDictionary *geofence, NSError *error) {
             
             if (!error) {
-                // Add it to our map
-                [self addGeofenceToMap:geofence];
+                GFGeofence *createdGeofence = [[GFGeofence alloc] initWithDictionary:geofence];
+                [self.geofenceArray addObject:createdGeofence];
+                
+                // Synchronize newly created geofence with sensor pipeline (this happens automatically if push is configured)
+                [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
+                    
+                    if (!error) {
+                        NSLog(@"GF: Successfully created and synchronized geofence %@ on ContextHub", createdGeofence.name);
+                        
+                        // Add it to our map
+                        [self addGeofenceToMap:createdGeofence];
+                    } else {
+                        NSLog(@"GF: Could not synchronize creation of geofence %@ on ContextHub", createdGeofence.name);
+                    }
+                }];
             } else {
                 // There was an error creating the geofence
                 [[[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"There was a problem creating your %@ geofence in ContextHub", name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+                NSLog(@"GF: Could not create geofence %@ on ContextHub", name);
             }
         }];
     }

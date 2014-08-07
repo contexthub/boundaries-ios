@@ -1,6 +1,10 @@
 Geofences Release Notes
 ---
 
+## 1.3.0 (Build 162) - August 5, 2014
+- Rewrite sample app to more directly show how to use the SDK (previous version still available in separate branch)
+- Updated README
+
 ## 1.2.0 (Build 145) - August 2, 2014
 - Add List tab which shows geofences currently on ContextHub with tag "geofence-tag"
 - Add ability to update geofence name from List tab
