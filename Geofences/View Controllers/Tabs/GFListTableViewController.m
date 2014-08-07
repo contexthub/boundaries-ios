@@ -17,6 +17,9 @@
 @property (nonatomic, weak) GFGeofence *selectedGeofence;
 
 @property (nonatomic, strong) NSMutableArray *geofenceArray;
+
+@property (nonatomic) BOOL verboseContextHubLogging;
+
 @end
 
 @implementation GFListTableViewController
@@ -33,6 +36,7 @@
     
     GFMapViewController* mapVC = navController.viewControllers[0];
     self.geofenceArray = mapVC.geofenceArray;
+    self.verboseContextHubLogging = mapVC.verboseContextHubLogging;
     
     [self refreshGeofences];
 }
@@ -45,6 +49,11 @@
     [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTag] location:nil radius:0 completionHandler:^(NSArray *geofences, NSError *error) {
         
         if (!error) {
+            
+            if (self.verboseContextHubLogging) {
+                NSLog(@"GF: [CCHGeofenceService getGeofencesWithTags: location: radius: completionHandler:] response: %@", geofences);
+            }
+            
             NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
             [self.geofenceArray removeAllObjects];
