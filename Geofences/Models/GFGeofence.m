@@ -35,15 +35,4 @@
     return self;
 }
 
-- (NSDictionary *)dictionaryForGeofence {
-    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.center.latitude] forKey:@"latitude"];
-    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.center.longitude] forKey:@"longitude"];
-    [self.geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.radius] forKey:@"radius"];
-    [self.geofenceDict setValue:self.name forKey:@"name"];
-    
-    [self.geofenceDict setValue:self.tags forKey:@"tags"];
-    
-    return self.geofenceDict;
-}
-
 @end
