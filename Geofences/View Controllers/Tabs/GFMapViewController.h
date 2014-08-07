@@ -10,4 +10,6 @@
 
 @interface GFMapViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *geofenceArray;
+
 @end

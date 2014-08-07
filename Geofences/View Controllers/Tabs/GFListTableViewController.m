@@ -9,12 +9,14 @@
 #import "GFListTableViewController.h"
 
 #import "GFGeofence.h"
-#import "GFGeofenceStore.h"
+#import "GFMapViewController.h"
 
 #import "GFGeofenceCell.h"
 
 @interface GFListTableViewController ()
 @property (nonatomic, weak) GFGeofence *selectedGeofence;
+
+@property (nonatomic, strong) NSMutableArray *geofenceArray;
 @end
 
 @implementation GFListTableViewController
@@ -26,7 +28,37 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.tableView reloadData];
+    // Grab the geofence array from GFMapViewController
+    UINavigationController *navController = (UINavigationController *)[self.tabBarController.childViewControllers objectAtIndex:0];
+    
+    GFMapViewController* mapVC = navController.viewControllers[0];
+    self.geofenceArray = mapVC.geofenceArray;
+    
+    [self refreshGeofences];
+}
+
+#pragma mark - Geofences
+
+// Refresh all geofences on the map
+- (void)refreshGeofences {
+    // If you have a location and particular radius of geofences you are interested in, you can fill those parameters to get back a smaller data set
+    [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTag] location:nil radius:0 completionHandler:^(NSArray *geofences, NSError *error) {
+        
+        if (!error) {
+            NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
+            
+            [self.geofenceArray removeAllObjects];
+            
+            for (NSDictionary *geofenceDict in geofences) {
+                GFGeofence *geofence = [[GFGeofence alloc] initWithDictionary:geofenceDict];
+                [self.geofenceArray addObject:geofence];
+            }
+            
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"GF: Could not sync geofences with ContextHub");
+        }
+    }];
 }
 
 #pragma mark - Actions
@@ -50,13 +82,31 @@
         self.selectedGeofence.name = [alertView textFieldAtIndex:0].text;
         
         // Update the geofence
-        [[GFGeofenceStore sharedInstance] updateGeofence:self.selectedGeofence completionHandler:^(NSError *error) {
+        NSMutableDictionary *geofenceDict = [NSMutableDictionary dictionary];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.selectedGeofence.center.latitude] forKey:@"latitude"];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.selectedGeofence.center.longitude] forKey:@"longitude"];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.selectedGeofence.radius] forKey:@"radius"];
+        [geofenceDict setValue:self.selectedGeofence.name forKey:@"name"];
+        
+        [geofenceDict setValue:self.selectedGeofence.tags forKey:@"tags"];
+        
+        [[CCHGeofenceService sharedInstance] updateGeofence:geofenceDict completionHandler:^(NSError *error) {
             
             if (!error) {
-                [self.tableView reloadData];
+                // Synchronize updated geofence with sensor pipeline (this happens automatically if push is configured)
+                [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
+                    
+                    if (!error) {
+                        NSLog(@"GF: Successfully updated and synchronized geofence %@ on ContextHub", self.selectedGeofence.name);
+                        [self.tableView reloadData];
+                    } else {
+                        NSLog(@"GF: Could not synchronize update of geofence %@ on ContextHub", self.selectedGeofence.name);
+                    }
+                }];
             } else {
-                // There was an error creating the geofence
+                // There was an error updating the geofence
                 [[[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"There was a problem updating your %@ geofence in ContextHub", self.selectedGeofence.name] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+                NSLog(@"GF: Could not update geofence %@ on ContextHub", self.selectedGeofence.name);
             }
         }];
     }
@@ -71,13 +121,13 @@
 
 // Number of rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [GFGeofenceStore sharedInstance].geofences.count;
+    return self.geofenceArray.count;
 }
 
 // Information for a row
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GFGeofenceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GFGeofenceCellIdentifier"];
-    GFGeofence *geofence = [GFGeofenceStore sharedInstance].geofences[indexPath.row];
+    GFGeofence *geofence = self.geofenceArray[indexPath.row];
     
     cell.nameLabel.text = geofence.name;
     cell.infoLabel.text = [NSString stringWithFormat:@"Latitude: %.2f, Longitude: %.2f, Radius: %.2f", geofence.center.latitude, geofence.center.longitude, geofence.radius];
@@ -90,32 +140,58 @@
     // Pop an alert view asking for a new name for the geofence
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update geofence" message:@"Enter the updated name of your geofence:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    self.selectedGeofence = [GFGeofenceStore sharedInstance].geofences[indexPath.row];
+    self.selectedGeofence = self.geofenceArray[indexPath.row];
     [alert textFieldAtIndex:0].text = self.selectedGeofence.name;
     [alert show];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-// A row is being updated
+// A row is being updated   
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete a geofence
-        GFGeofence *geofenceToDelete = [GFGeofenceStore sharedInstance].geofences[indexPath.row];
-        [[GFGeofenceStore sharedInstance] deleteGeofence:geofenceToDelete completionHandler:^(NSError *error) {
-            
+        GFGeofence *geofenceToDelete = self.geofenceArray[indexPath.row];
+        
+        // Delete the geofence
+        NSMutableDictionary *geofenceDict = [NSMutableDictionary dictionary];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", geofenceToDelete.center.latitude] forKey:@"latitude"];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", geofenceToDelete.center.longitude] forKey:@"longitude"];
+        [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", geofenceToDelete.radius] forKey:@"radius"];
+        [geofenceDict setValue:geofenceToDelete.name forKey:@"name"];
+        [geofenceDict setValue:geofenceToDelete.geofenceID forKey:@"id"];
+        [geofenceDict setValue:geofenceToDelete.tags forKey:@"tags"];
+        
+        // Remove geofence from our array
+        if ([self.geofenceArray containsObject:geofenceToDelete]) {
+            [self.geofenceArray removeObject:geofenceToDelete];
+        }
+        
+        [[CCHGeofenceService sharedInstance] deleteGeofence:geofenceDict completionHandler:^(NSError *error) {
             if (!error) {
-                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 
-                // Synchronize geofences (this would not need to be done if push were enabled)
-                [[GFGeofenceStore sharedInstance] syncGeofences];
+                // Synchronize the sensor pipeline with ContextHub (if you have push set up correctly, you can skip this step!)
+                [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
+                    
+                    if (!error) {
+                        NSLog(@"GF: Successfully deleted geofence %@ on ContextHub", geofenceToDelete.name);
+                        
+                        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        
+                        // Synchronize geofences (this would not need to be done if push were enabled)
+                        [self refreshGeofences];
+                    } else {
+                        NSLog(@"GF: Could not synchronize deletion of geofence %@ on ContextHub", geofenceToDelete.name);
+                    }
+                    
+                    // Stop table editing
+                    [self.tableView setEditing:FALSE animated:YES];
+                }];
             } else {
                 [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Error deleting geofence from ContextHub" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+                NSLog(@"GF: Could not delete geofence %@ on ContextHub", geofenceToDelete.name);
             }
-            
-            // Stop table editing
-            [self.tableView setEditing:FALSE animated:YES];
         }];
     }
 }

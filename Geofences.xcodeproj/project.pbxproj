@@ -21,7 +21,6 @@
 		1F005313195365BB00DF2708 /* GeofencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005312195365BB00DF2708 /* GeofencesTests.m */; };
 		1F00531E1953666B00DF2708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F00531D1953666B00DF2708 /* Main.storyboard */; };
 		1F005326195367F000DF2708 /* GFGeofence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F005325195367F000DF2708 /* GFGeofence.m */; };
-		1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0053281953680D00DF2708 /* GFGeofenceStore.m */; };
 		1F00532B195368C200DF2708 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532A195368C200DF2708 /* CoreLocation.framework */; };
 		1F00532D195368C900DF2708 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532C195368C900DF2708 /* CoreMotion.framework */; };
 		1F00532F195368D000DF2708 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F00532E195368D000DF2708 /* MobileCoreServices.framework */; };
@@ -69,8 +68,6 @@
 		1F00531D1953666B00DF2708 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1F005324195367F000DF2708 /* GFGeofence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofence.h; path = Models/GFGeofence.h; sourceTree = "<group>"; };
 		1F005325195367F000DF2708 /* GFGeofence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofence.m; path = Models/GFGeofence.m; sourceTree = "<group>"; };
-		1F0053271953680D00DF2708 /* GFGeofenceStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeofenceStore.h; path = Models/GFGeofenceStore.h; sourceTree = "<group>"; };
-		1F0053281953680D00DF2708 /* GFGeofenceStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeofenceStore.m; path = Models/GFGeofenceStore.m; sourceTree = "<group>"; };
 		1F00532A195368C200DF2708 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1F00532C195368C900DF2708 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F00532E195368D000DF2708 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -127,13 +124,13 @@
 		1F0052E1195365BB00DF2708 = {
 			isa = PBXGroup;
 			children = (
-				1F17C9841989266B009DDA11 /* README.md */,
-				1F17C9861989266E009DDA11 /* release_notes.md */,
-				1F17C98819892672009DDA11 /* LICENSE */,
 				1F0052F3195365BB00DF2708 /* Geofences */,
 				1F00530C195365BB00DF2708 /* GeofencesTests */,
 				1F0052EC195365BB00DF2708 /* Frameworks */,
 				1F0052EB195365BB00DF2708 /* Products */,
+				1F17C9841989266B009DDA11 /* README.md */,
+				1F17C9861989266E009DDA11 /* release_notes.md */,
+				1F17C98819892672009DDA11 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,8 +211,6 @@
 			children = (
 				1F005324195367F000DF2708 /* GFGeofence.h */,
 				1F005325195367F000DF2708 /* GFGeofence.m */,
-				1F0053271953680D00DF2708 /* GFGeofenceStore.h */,
-				1F0053281953680D00DF2708 /* GFGeofenceStore.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -319,7 +314,7 @@
 				ORGANIZATIONNAME = ChaiOne;
 				TargetAttributes = {
 					1F0052E9195365BB00DF2708 = {
-						DevelopmentTeam = FACNVSTRSZ;
+						DevelopmentTeam = K83DSSAEPP;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -401,7 +396,6 @@
 				1F914F8D198D901F00E2C6A7 /* GFTabBarController.m in Sources */,
 				1F005326195367F000DF2708 /* GFGeofence.m in Sources */,
 				1F914F92198D90A300E2C6A7 /* GFMapViewController.m in Sources */,
-				1F0053291953680D00DF2708 /* GFGeofenceStore.m in Sources */,
 				1F914F86198D846A00E2C6A7 /* GFGeofenceCell.m in Sources */,
 				1F0052FA195365BB00DF2708 /* main.m in Sources */,
 				1F0052FE195365BB00DF2708 /* GFAppDelegate.m in Sources */,
@@ -483,7 +477,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
 		};
@@ -514,7 +508,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -8,8 +8,6 @@
 
 #import "GFAppDelegate.h"
 
-#import "GFGeofenceStore.h"
-
 @implementation GFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -21,7 +19,8 @@
 #endif
     
     //Register the app id of the application you created on https://app.contexthub.com
-    [ContextHub registerWithAppId:@"YOUR-GEOFENCE-APP-ID-HERE"];
+    //[ContextHub registerWithAppId:@"YOUR-GEOFENCE-APP-ID-HERE"];
+    [ContextHub registerWithAppId:@"4e0aad2a-b052-42e0-93ee-6f024d11de10"];
     
     //Set the app delegate as the Datasource and Delegate of the Sensor Pipeline so that we can tap into the events.
     [[CCHSensorPipeline sharedInstance] setDelegate:self];
