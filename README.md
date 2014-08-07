@@ -167,4 +167,20 @@ NSDictionary *geofenceDict = @{ @"id":geofenceID, @"name":name, @"latitude":latS
 }];
 ```
 
+And here is what a response from create and get calls looks like:
+```
+{
+    id = 5989;
+    latitude = "29.76363799999999";
+    longitude = "-95.46187399999999";
+    name = ChaiOne;
+    radius = 250;
+    "tag_string" = "geofence-tag";
+    tags =     (
+        "geofence-tag"
+    );
+}
+
+```
+
 That's it! Hopefully this sample application showed you how easy it is to work with geofences in ContextHub to present contextual information based on location.

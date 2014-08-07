@@ -1,8 +1,9 @@
 Geofences Release Notes
 ---
 
-## 1.3.0 (Build 162) - August 5, 2014
+## 1.3.0 (Build 164) - August 5, 2014
 - Rewrite sample app to more directly show how to use the SDK (previous version still available in separate branch)
+- Add verbose logging from ContextHub responses
 - Updated README
 
 ## 1.2.0 (Build 145) - August 2, 2014

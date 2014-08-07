@@ -11,5 +11,6 @@
 @interface GFMapViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *geofenceArray;
+@property (nonatomic) BOOL verboseContextHubLogging;
 
 @end

@@ -33,6 +33,8 @@
     
     self.geofenceArray = [NSMutableArray array];
     
+    self.verboseContextHubLogging = YES; // Verbose logging shows all responses from ContextHub
+    
     // Register to listen to notifications about geofence entering or leaving
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
     
@@ -62,6 +64,11 @@
     [[CCHGeofenceService sharedInstance] getGeofencesWithTags:@[GFGeofenceTag] location:nil radius:0 completionHandler:^(NSArray *geofences, NSError *error) {
         
         if (!error) {
+            
+            if (self.verboseContextHubLogging) {
+                NSLog(@"GF: [CCHGeofenceService getGeofencesWithTags: location: radius: completionHandler:] response: %@", geofences);
+            }
+            
             NSLog(@"GF: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
             [self.geofenceArray removeAllObjects];
@@ -192,6 +199,11 @@
         [[CCHGeofenceService sharedInstance] createGeofenceWithCenter:self.mapView.centerCoordinate radius:250 name:name tags:@[GFGeofenceTag] completionHandler:^(NSDictionary *geofence, NSError *error) {
             
             if (!error) {
+                
+                if (self.verboseContextHubLogging) {
+                    NSLog(@"GF: [CCHGeofenceService createGeofenceWithCenter: radius: tags: completionHandler:] response: %@", geofence);
+                }
+                
                 GFGeofence *createdGeofence = [[GFGeofence alloc] initWithDictionary:geofence];
                 [self.geofenceArray addObject:createdGeofence];
                 
