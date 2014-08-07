@@ -78,7 +78,7 @@ NSString *geofenceTag = @"geofence-tag";
             if (!error) {
                 NSLog(@"Successfully synchronized with ContextHub");
             } else {
-            NSLog(@"DM: Could not synchronize withContextHub");
+            NSLog(@"Could not synchronize withContextHub");
             }
         }];
     } else {
@@ -136,9 +136,9 @@ NSDictionary *geofenceDict = @{ @"id":geofenceID, @"name":name, @"latitude":latS
         [[CCHSensorPipeline sharedInstance] synchronize:^(NSError *error) {
 
                 if (!error) {
-            NSLog(@"DM: Successfully synchronized with ContextHub");
+            NSLog(@"Successfully synchronized with ContextHub");
             } else {
-                NSLog(@"DM: Could not synchronize withContextHub");
+                NSLog(@"Could not synchronize withContextHub");
             }
         }];
     } else {
