@@ -37,6 +37,7 @@ Geofences allow your application to wake up and respond to a user entering or ex
 2. Enter a name for this context which will be easy for you to remember. For now, name it "Geofence In".
 3. Select the `"geofence_in"` event type. Now any event of type `"geofence_in"` will trigger this rule. You can have multiple rules with the same event type, which is why the name of events should be descriptive of the rule.
 4. The Context Rule text box is where you can write a rule telling ContextHub what actions to take in response to an event triggered with the specific event type. This code is Javascript, and you have access to some context objects: event, push, vault, http, and console. For now, leave the Code box blank and then click save.
+5. Create `"geofence_out"` rule as well in the portal. A rule must exist in ContextHub.com before a device will generate that specific event type automatically, so this is necessary to get those type of events to fire as well.
 
 ## Create a Geofence
 
