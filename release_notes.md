@@ -1,7 +1,7 @@
 Geofences Release Notes
 ---
 
-## 1.3.1 (Build 168) - August 11, 2014
+## 1.3.1 (Build 169) - August 11, 2014
 - Fix bug where app would alert an error when updating or deleting geofences
 - Updated README
 
