@@ -217,7 +217,6 @@ Here is what a response from create and get calls looks like:
         
     // Check and make sure it's a geofence event
     if ([event valueForKeyPath:CCHGeofenceEventKeyPath]) {
-        
         NSString *geofenceID = [event valueForKeyPath:CCHGeofenceEventIDKeyPath];
 
         if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHEventNameGeofenceIn) {
