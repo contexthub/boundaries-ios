@@ -63,6 +63,10 @@
                 [self.geofenceArray addObject:geofence];
             }
             
+            // Sort geofences by name
+            NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+            [self.geofenceArray sortUsingDescriptors:@[nameSortDescriptor]];
+            
             [self.tableView reloadData];
         } else {
             NSLog(@"GF: Could not sync geofences with ContextHub");
