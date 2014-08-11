@@ -96,8 +96,10 @@
         [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.selectedGeofence.center.longitude] forKey:@"longitude"];
         [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", self.selectedGeofence.radius] forKey:@"radius"];
         [geofenceDict setValue:self.selectedGeofence.name forKey:@"name"];
-        
         [geofenceDict setValue:self.selectedGeofence.tags forKey:@"tags"];
+        
+        NSNumber *geofenceID = [NSNumber numberWithInt:(int)[self.selectedGeofence.geofenceID integerValue]];
+        [geofenceDict setValue:geofenceID forKey:@"id"];
         
         [[CCHGeofenceService sharedInstance] updateGeofence:geofenceDict completionHandler:^(NSError *error) {
             
@@ -169,8 +171,10 @@
         [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", geofenceToDelete.center.longitude] forKey:@"longitude"];
         [geofenceDict setValue:[NSString stringWithFormat:@"%.6f", geofenceToDelete.radius] forKey:@"radius"];
         [geofenceDict setValue:geofenceToDelete.name forKey:@"name"];
-        [geofenceDict setValue:geofenceToDelete.geofenceID forKey:@"id"];
         [geofenceDict setValue:geofenceToDelete.tags forKey:@"tags"];
+        
+        NSNumber *geofenceID = [NSNumber numberWithInt:(int)[geofenceToDelete.geofenceID integerValue]];
+        [geofenceDict setValue:geofenceID forKey:@"id"];
         
         // Remove geofence from our array
         if ([self.geofenceArray containsObject:geofenceToDelete]) {
