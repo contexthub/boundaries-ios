@@ -134,6 +134,7 @@ NSString *geofenceTag2 = @"office";
 NSString *latString = [NSString stringWithFormat: @"%.6f", lat];
 NSString *lngString = [NSString stringWithFormat: @"%.6f", lng];
 NSString *radString = [NSString stringWithFormat: @"%.6f", radius];
+NSNumber *geofenceID = @1000;
 
 NSDictionary *geofenceDict = @{ @"id":geofenceID, @"name":name, @"latitude":latString, @"longitude":lngString, @"radius":radString,  @"tags":@[geofenceTag, geofenceTag2] };
 [[CCHGeofenceService sharedInstance] updateGeofence:geofenceDict completionHandler:^(NSError *error) {
