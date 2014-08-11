@@ -1,6 +1,10 @@
 Geofences Release Notes
 ---
 
+## 1.3.1 (Build 168) - August 11, 2014
+- Fix bug where app would alert an error when updating or deleting geofences
+- Updated README
+
 ## 1.3.0 (Build 164) - August 5, 2014
 - Rewrite sample app to more directly show how to use the SDK (previous version still available in separate branch)
 - Add verbose logging from ContextHub responses
