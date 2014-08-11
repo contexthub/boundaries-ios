@@ -195,4 +195,39 @@ Here is what a response from create and get calls looks like:
 }
 ```
 
+##### Handling an event
+```objc
+- (void)viewDidAppear:(BOOL animated) {
+    [super viewDidAppear:animated];
+    
+    // Start listening to event notifications about sensor pipeline posting events
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL animated) {
+    [super viewDidDisappear:animated];
+    
+    // Stop listening to event notifications
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CCHSensorPipelineDidPostEvent object:nil];
+}
+    
+// Handle an event from ContextHub
+- (void)handleEvent:(NSNotification *)notification {
+    NSDictionary *event = notification.object;
+        
+    // Check and make sure it's a geofence event
+    if ([event valueForKeyPath:CCHGeofenceEventKeyPath]) {
+        
+        NSString *geofenceID = [event valueForKeyPath:CCHGeofenceEventIDKeyPath];
+
+        if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHEventNameGeofenceIn) {
+            // We entered range of a monitored geofence region
+
+        } else if ([event valueForKeyPath:CCHEventNameKeyPath] == CCHEventNameGeofenceOut) {
+            // We exited range of a monitored geofence region
+        }
+    }
+}
+```
+
 That's it! Hopefully this sample application showed you how easy it is to work with geofences in ContextHub to present contextual information based on location.
