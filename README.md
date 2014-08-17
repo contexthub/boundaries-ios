@@ -1,7 +1,7 @@
-# Geofences Sample app
+# Boundaries (Geofences) Sample app
 --
 
-The Geofences sample app that introduces you to the geofence features of the ContextHub iOS SDK and developer portal.
+The Boundaries sample app that introduces you to the geofence features of the ContextHub iOS SDK and developer portal.
 
 ## Purpose
 This sample application will show you how to create, retrieve, update, and delete (CRUD) geofences as well as respond to geofence in and out events in ContextHub. ContextHub takes care of setting up and monitoring geofences automatically after creation and synchronization
@@ -88,6 +88,7 @@ NSString *geofenceTag = @"geofence-tag";
     }
 }];
 ```
+
 ##### Retrieving geofences via a tag
 ```objc
 // Getting all geofences with the tag "geofence-tag" near our location in 2000 meter radius
