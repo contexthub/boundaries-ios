@@ -1,4 +1,4 @@
-Geofences Release Notes
+Boundaries (Geofences) Release Notes
 ---
 
 ## 1.3.1 (Build 171) - August 11, 2014

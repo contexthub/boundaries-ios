@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F9DC44619A158E100696CB2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F9DC44519A158E100696CB2 /* README.md */; };
+		1F9DC44819A158E500696CB2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F9DC44719A158E500696CB2 /* release_notes.md */; };
+		1F9DC44A19A158EA00696CB2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1F9DC44919A158EA00696CB2 /* LICENSE */; };
 		1FF327B8199C34BC00F4BE0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF327B7199C34BC00F4BE0B /* Foundation.framework */; };
 		1FF327BA199C34BC00F4BE0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF327B9199C34BC00F4BE0B /* CoreGraphics.framework */; };
 		1FF327BC199C34BC00F4BE0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF327BB199C34BC00F4BE0B /* UIKit.framework */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F9DC44519A158E100696CB2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1F9DC44719A158E500696CB2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		1F9DC44919A158EA00696CB2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1FF327B4199C34BC00F4BE0B /* Boundaries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boundaries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF327B7199C34BC00F4BE0B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FF327B9199C34BC00F4BE0B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -119,6 +125,9 @@
 				1FF327D6199C34BC00F4BE0B /* BoundariesTests */,
 				1FF327B6199C34BC00F4BE0B /* Frameworks */,
 				1FF327B5199C34BC00F4BE0B /* Products */,
+				1F9DC44519A158E100696CB2 /* README.md */,
+				1F9DC44719A158E500696CB2 /* release_notes.md */,
+				1F9DC44919A158EA00696CB2 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -311,8 +320,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9DC44819A158E500696CB2 /* release_notes.md in Resources */,
 				1FF32804199C35CF00F4BE0B /* Main_iPhone.storyboard in Resources */,
 				1FF327C2199C34BC00F4BE0B /* InfoPlist.strings in Resources */,
+				1F9DC44A19A158EA00696CB2 /* LICENSE in Resources */,
+				1F9DC44619A158E100696CB2 /* README.md in Resources */,
 				1FF327E9199C35A400F4BE0B /* ChaiOne.gpx in Resources */,
 				1FF327CA199C34BC00F4BE0B /* Images.xcassets in Resources */,
 			);
