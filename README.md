@@ -257,4 +257,6 @@ Here is what a response from create and get calls looks like:
 }
 ```
 
+##### Final Words
+
 That's it! Hopefully this sample application showed you how easy it is to work with geofences in ContextHub to present contextual information based on location.
