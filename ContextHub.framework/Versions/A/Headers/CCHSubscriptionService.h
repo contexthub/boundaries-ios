@@ -69,6 +69,21 @@ extern NSString * const CCHVaultItemUpdatedNotification;
 extern NSString * const CCHVaultItemDeletedNotification;
 
 /**
+ Posted to tagged device subscribers when a corresponding tagged device is created.
+ */
+extern NSString * const CCHDeviceCreatedNotification;
+
+/**
+ Posted to tagged device subscribers when a corresponding tagged device is updated.
+ */
+extern NSString * const CCHDeviceUpdatedNotification;
+
+/**
+ Posted to tagged device subscribers when a corresponding tagged device is deleted.
+ */
+extern NSString * const CCHDeviceDeletedNotification;
+
+/**
  Beacon option for adding and removing subscriptions.
  */
 extern NSString * const CCHOptionBeacon;
@@ -82,6 +97,11 @@ extern NSString * const CCHOptionGeofence;
  Vault option for adding and removing subscriptions.
  */
 extern NSString * const CCHOptionVault;
+
+/**
+ Device option for adding and removing subscriptions.
+ */
+extern NSString * const CCHOptionDevice;
 
 
 #define kSubscriptionErrorDomain @"com.contexthub.subscription"
@@ -121,6 +141,15 @@ When server changes are made, the device is notified using a background push not
  ### CCHVaultItemDeletedNotification
  the notification object is an id of the vualt item that was deleted.  The userInfo object is not set.
 
+ ### CCHDeviceCreatedNotification
+ the notification object is an NSDictionary representation of the device that was created.  The userInfo object is not set.
+ 
+ ### CCHDeviceUpdatedNotification
+ the notification object is an NSDictionary of representation of the device that was updated.  The userInfo object is not set.
+ 
+ ### CCHDeviceDeletedNotification
+ the notification object is an id of the device that was deleted.  The userInfo object is not set.
+
  */
 @interface CCHSubscriptionService : NSObject
 
@@ -132,9 +161,9 @@ When server changes are made, the device is notified using a background push not
 /**
  Gets all subscriptions for the current device.
  @note Access individual subscriptions using "BeaconSubscription" and "GeofenceSubscription" keys
- @param completion executed when the request completes.  The block is passed an NSDictionary of subscriptions.  If an error occurs, the NSError will be passed to the block.
+ @param completionHandler executed when the request completes.  The block is passed an NSDictionary of subscriptions.  If an error occurs, the NSError will be passed to the block.
  */
-- (void)getSubscriptionsWithCompletion:(void(^)(NSDictionary *subscriptions, NSError *error))completion;
+- (void)getSubscriptionsWithCompletionHandler:(void(^)(NSDictionary *subscriptions, NSError *error))completionHandler;
 
 /**
  Subscribes the device to beacon change notifications for the specified tags.
@@ -168,7 +197,7 @@ When server changes are made, the device is notified using a background push not
  Subscribes the device to change notifications for the specified tags.
  @note This will turn on background push notifications for all elements that have tags matching the tags array specified.  You must enable push notifications, enbale remote notifications and background fetch capabilites, and you must call application:didReceiveRemoteNotification:completionHandler: on CCHPush.
  @param tags An NSArray of tags
- @param options (optional) an NSArray of the elements that you want to subscribe to. (CCHOptionBeacon, CCHOptionGeofence, CCHOptionVault)
+ @param options (optional) an NSArray of the elements that you want to subscribe to. (CCHOptionBeacon, CCHOptionGeofence, CCHOptionVault, CCHOptionDevice)
  @param completionHandler (optional) Is executed when the request completes.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)addSubscriptionsForTags:(NSArray *)tags options:(NSArray *)options completionHandler:(void(^)(NSError *error))completionHandler;
@@ -176,7 +205,7 @@ When server changes are made, the device is notified using a background push not
 /**
  Unsubscribes the device from change notifications for the specified tags.
  @param tags An NSArray of tags
- @param options (optional) an NSArray of the elements that you want to unsubscribe from. (CCHOptionBeacon, CCHOptionGeofence, CCHOptionVault)
+ @param options (optional) an NSArray of the elements that you want to unsubscribe from. (CCHOptionBeacon, CCHOptionGeofence, CCHOptionVault, CCHOptionDevice)
  @param completionHandler (optional) Is executed when the request completes.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)removeSubscriptionsForTags:(NSArray *)tags options:(NSArray *)options completionHandler:(void(^)(NSError *error))completionHandler;

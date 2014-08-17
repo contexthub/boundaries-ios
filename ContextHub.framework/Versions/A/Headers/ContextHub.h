@@ -5,6 +5,8 @@
 //  Created by Travis Fischer on 9/18/13.
 //  Copyright (c) 2013 ChaiOne. All rights reserved.
 //
+//  Version 1.2.0
+//
 
 #import <Foundation/Foundation.h>
 
@@ -20,7 +22,7 @@
 //Application Services
 #import "CCHPush.h"
 #import "CCHVault.h"
-
+#import "CCHDevice.h"
 
 /**
  * The primary interface with the ContextHub SDK
@@ -53,4 +55,9 @@
  If you are using Push Notifications, set this value to YES for debug builds.  This will tell ContextHub that the push token for the device should be used with the Sandbox push service.
  */
 @property (nonatomic, assign) BOOL debug;
+
+/**
+ build version
+ */
+extern NSString * const CCHVersion;
 @end

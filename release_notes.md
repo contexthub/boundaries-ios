@@ -1,5 +1,8 @@
-Boundaries (Geofences) Release Notes
----
+# Boundaries (Geofences) Release Notes
+
+## 1.3.2 (Build 172) - August 17, 2014
+- Update to ContextHub v1.2.0 framework
+- Add Table of Contents to README
 
 ## 1.3.1 (Build 171) - August 11, 2014
 - Fix bug where app would alert an error when updating or deleting geofences

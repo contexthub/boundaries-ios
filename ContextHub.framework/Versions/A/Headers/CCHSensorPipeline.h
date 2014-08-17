@@ -143,7 +143,7 @@ extern NSString * const CCHUntaggedElements;
  @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError wil be passed to the block.
  @note The event must contain a name key.  If you want to pass contextual information along with the event, you can do so by setting a data key for the event.
  */
-- (void)triggerEvent:(NSDictionary *)event completionHandeler:(void(^)(NSError *error))completionHandler;
+- (void)triggerEvent:(NSDictionary *)event completionHandler:(void(^)(NSError *error))completionHandler;
 
 /**
  Calling synchronize will tell the SDK to check for server-side context changes and will update monitored regions.
