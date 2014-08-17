@@ -21,7 +21,7 @@ The Boundaries sample app that introduces you to the geofence features of the Co
   - **[Updating a Geofence](#updating-a-geofence)**
   - **[Deleting a Geofence](#deleting-a-geofence)**
   - **[Response](#response)**
-  - **[Handling an Event](#handling-an-event)
+  - **[Handling an Event](#handling-an-event)**
 12. **[Final Words](#final-words)**
 
 ## Purpose
