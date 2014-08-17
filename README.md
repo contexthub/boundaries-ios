@@ -11,8 +11,8 @@ Geofences allow your application to wake up and respond to a user entering or ex
 
 ## Getting Started
 
-1. Get started by either forking or cloning the Geofence repo. Visit [GitHub Help](https://help.github.com/articles/fork-a-repo) if you need help.
-2. Go to [ContextHub](http://app.contexthub.com) and create a new Geofence application.
+1. Get started by either forking or cloning the Boundaries repo. Visit [GitHub Help](https://help.github.com/articles/fork-a-repo) if you need help.
+2. Go to [ContextHub](http://app.contexthub.com) and create a new Boundaries application.
 3. Find the app id associated with the application you just created. Its format looks something like this: `13e7e6b4-9f33-4e97-b11c-79ed1470fc1d`.
 4. Open up your Xcode project and put the app id into the `[ContextHub registerWithAppId:]` method call.
 5. Build and run the project in the simulator.
@@ -26,7 +26,7 @@ Geofences allow your application to wake up and respond to a user entering or ex
 
 ## ContextHub.com
 
-1. The real power of ContextHub comes from collecting and reacting to events posted from devices onto the server. Go to the [developer portal](https://app.contexthub.com) and click on your  Geofence app to access its data.
+1. The real power of ContextHub comes from collecting and reacting to events posted from devices onto the server. Go to the [developer portal](https://app.contexthub.com) and click on your Boundaries app to access its data.
 2. Click on the "Geofences" tab.  You should see the geofence that you just created in the simulator.  From here you can create, update, and delete geofences.
 3. Next click on the Contexts link which will take you to the "Contexts" page. Contexts let you change how the server will respond to events triggered by devices. Let's go ahead and create a new context.
 
