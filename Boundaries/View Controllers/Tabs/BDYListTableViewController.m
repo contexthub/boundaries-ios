@@ -9,7 +9,6 @@
 #import "BDYListTableViewController.h"
 
 #import "BDYGeofence.h"
-#import "BDYMapViewController.h"
 
 #import "BDYGeofenceCell.h"
 
@@ -26,17 +25,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.geofenceArray = [NSMutableArray array];
+    self.verboseContextHubLogging = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    // Grab the geofence array from BDYMapViewController
-    UINavigationController *navController = (UINavigationController *)[self.tabBarController.childViewControllers objectAtIndex:0];
-    
-    BDYMapViewController* mapVC = navController.viewControllers[0];
-    self.geofenceArray = mapVC.geofenceArray;
-    self.verboseContextHubLogging = mapVC.verboseContextHubLogging;
     
     [self refreshGeofences];
 }

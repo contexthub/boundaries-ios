@@ -1,5 +1,8 @@
 # Boundaries (Geofences) Release Notes
 
+## 1.3.3 (Build 173) - August 25, 2014
+- Remove BDYListTableViewController dependency on BDYMapViewController
+
 ## 1.3.2 (Build 172) - August 17, 2014
 - Update to ContextHub v1.2.0 framework
 - Add Table of Contents to README
