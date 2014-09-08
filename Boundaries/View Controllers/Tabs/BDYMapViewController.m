@@ -7,6 +7,7 @@
 //
 
 #import "BDYMapViewController.h"
+#import <ContextHub/ContextHub.h>
 
 #import "BDYGeofence.h"
 #import "BDYConstants.h"
@@ -100,7 +101,7 @@
     
     // Add the circle indicating radius
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
-    [self.mapView addOverlay:circle];
+    //[self.mapView addOverlay:circle];
 }
 
 // Adds all geofences to the map

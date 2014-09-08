@@ -26,7 +26,7 @@
     [[CCHSensorPipeline sharedInstance] setDataSource:self];
     
     //This tells ContextHub about the tags you will use to identify the geofences that you want to automatically monitor.
-    if (![[CCHSensorPipeline sharedInstance] addSubscriptionForTags:@[BDYGeofenceTag]]) {
+    if (![[CCHSensorPipeline sharedInstance] addElementsWithTags:@[BDYGeofenceTag]]) {
         NSLog(@"BDY: Failed to add subscription to \"%@\" tag", BDYGeofenceTag);
     }
     
