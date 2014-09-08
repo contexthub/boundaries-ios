@@ -35,14 +35,14 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  
  | key       | value     |
  | --------- | --------- |
- | additional_info | NSDicationary of device specific information (not always present) |
+ | additional_info | NSDictionary of device specific information (not always present) |
  | alias | alias that is set for the device (not always present) |
  | device_type | describes the device, often pulled for the user agent  |
  | id | database id for the device |
  | last_profile | NSDictionary of contextual information from the last time the device was seen by the server |
  | push_token | push token assigned to the device (not always present) |
  | tag_string | a comma separated string of the tags associated with the device |
- | tags | NSArray of tags associated with the geofence |
+ | tags | NSArray of tags associated with the device |
  */
 @interface CCHDevice : NSObject
 
@@ -55,14 +55,6 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  @return The vendor device id as UUIDString.
  */
 - (NSString *)deviceId;
-
-/**
- Registers the device with ContextHub.  This method gathers meta-data about the device and sends it to ContextHub.
- @param completionHandler (optional) Called when the request completes. If an error occurs, the NSError will be passed to the block.
- @note this method can be called multiple times.
- */
-- (void)registerDeviceWithCompletionHandler:(void(^)(NSError *error))completionHandler;
-
 
 /**
  Gets a device from ContextHub using the device Id.
@@ -96,6 +88,6 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the device.  If an error occurs, the NSError wil be passed to the block.
  @note This method updates the data for the current device.  The tags and alias that are set here can be used with CCHPush.  The tags can also be used with the CCHSubscriptionService.  This method gathers meta-data about the device and sends it to ContextHub along with the alias and tags.  You can call this method multiple times.
  */
-- (void)updateDeviceWithAlias:(NSString *)alias tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *device, NSError *error))completionHandler;
+- (void)setDeviceAlias:(NSString *)alias tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *device, NSError *error))completionHandler;
 
 @end
