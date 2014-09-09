@@ -92,16 +92,18 @@
 
 // Adds a geofence to the map
 - (void)addGeofenceToMap:(BDYGeofence *)geofence {
-    // Add the pin
-    MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-    pin.coordinate = geofence.center;
-    pin.title = geofence.name;
-    pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
-    [self.mapView addAnnotation:pin];
-    
-    // Add the circle indicating radius
-    MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
-    [self.mapView addOverlay:circle];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Add the pin
+        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
+        pin.coordinate = geofence.center;
+        pin.title = geofence.name;
+        pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
+        [self.mapView addAnnotation:pin];
+        
+        // Add the circle indicating radius
+        MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
+        [self.mapView addOverlay:circle];
+    });
 }
 
 // Adds all geofences to the map
