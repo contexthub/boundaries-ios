@@ -41,8 +41,17 @@
     
     // Initialize location manager and get it to start updating our location
     self.locationManager = [[CLLocationManager alloc] init];
+    
+    // Needed for iOS 8
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    
     self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.locationManager startUpdatingLocation];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -92,18 +101,16 @@
 
 // Adds a geofence to the map
 - (void)addGeofenceToMap:(BDYGeofence *)geofence {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // Add the pin
-        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-        pin.coordinate = geofence.center;
-        pin.title = geofence.name;
-        pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
-        [self.mapView addAnnotation:pin];
-        
-        // Add the circle indicating radius
-        MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
-        [self.mapView addOverlay:circle];
-    });
+    // Add the pin
+    MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
+    pin.coordinate = geofence.center;
+    pin.title = geofence.name;
+    pin.subtitle = [NSString stringWithFormat:@"Radius: %.2f meters", geofence.radius];
+    [self.mapView addAnnotation:pin];
+    
+    // Add the circle indicating radius
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:geofence.center radius:geofence.radius];
+    [self.mapView addOverlay:circle];
 }
 
 // Adds all geofences to the map
@@ -243,7 +250,7 @@
         [self.mapView setRegion:newRegion animated:YES];
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
         
-        [self.locationManager stopUpdatingLocation];
+        //[self.locationManager stopUpdatingLocation];
     }
 }
 

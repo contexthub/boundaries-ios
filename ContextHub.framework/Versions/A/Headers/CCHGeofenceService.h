@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
  @param radius The radius of to be applied to the geofence.
  @param name The name of the geofence.
  @param tags (optional) The tags to be applied to the geofence.
- @param completionHandler (optional) Called when the request completes.  The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler (optional) Called when the request completes.  The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)createGeofenceWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius name:(NSString *)name tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *geofence, NSError *error))completionHandler;
 
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
  Gets a geofence from ContextHub using the geofence Id.
 
  @param geofenceId The id of the geofence stored in ContextHub.
- @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the geofence.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)getGeofenceWithId:(NSString *)geofenceId completionHandler:(void(^)(NSDictionary *geofence, NSError *error))completionHandler;
 

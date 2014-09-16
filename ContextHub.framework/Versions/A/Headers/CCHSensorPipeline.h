@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, CCHSensorPipelineErrorCode) {
 
 /**
  Sometimes you may want to keep an event from posting to the ContextHub service.  This method gives you the opportunity to stop the call.
- If you return NO, none of the other delegate methods will git called, and the event will be discarded.
+ If you return NO, none of the other delegate methods will get called, and the event will be discarded.
  @note No history of the event will be captured if you return NO here.
  @returns boolean indicating if the event should be posted to ContextHUB
  @param sensorPipeline The CCHSensorPipeline.
@@ -125,13 +125,13 @@ extern NSString * const CCHSensorPipelineDidCancelEvent;
 extern NSString * const CCHUntaggedElements;
 
 /**
- The CCHSensorPipeline monitors events as they are triggered.  You can use the CCHSensorPipline to gain access to the events before and after they are sent to the server.  The CCHSensorPipelineDelegate and CCHSensorPipelineDataSource give you the ability to filter events and add custom data to events before they are sent to the ContextHub server.
+ The CCHSensorPipeline monitors events as they are triggered.  You can use the CCHSensorPipeline to gain access to the events before and after they are sent to the server.  The CCHSensorPipelineDelegate and CCHSensorPipelineDataSource give you the ability to filter events and add custom data to events before they are sent to the ContextHub server.
  As events are triggered on the device, the framework will assemble a context dictionary that includes data about the event.
- The CCHSensorPipeline will call datasource and delegate lifecycle methods and post lifecycle notifications.
+ The CCHSensorPipeline will call datasource and delegate life cycle methods and post lifecycle notifications.
  
  ## Notifications
  
- The following life-cycle notifications are posted.  The notifications are called before the associated delegate methods are called.
+ The following life cycle notifications are posted.  The notifications are called before the associated delegate methods are called.
 
  ### CCHSensorPipelineDidDetectEvent
  The object is the assembled context event.  The userInfo object is not set.
@@ -149,22 +149,22 @@ extern NSString * const CCHUntaggedElements;
 @interface CCHSensorPipeline : NSObject
 
 /**
- Returns the singleton instnace of the CCHSensorPipeline
+ Returns the singleton instanace of the CCHSensorPipeline
  */
 + (instancetype)sharedInstance;
 
 /**
  This method give you the ability to trigger custom events on the ContextHub sensor pipeline
  @param event The event that you want to send to the server.
- @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError will be passed to the block.
  @note The event must contain a name key.  If you want to pass contextual information along with the event, you can do so by setting a data key for the event.
  */
 - (void)triggerEvent:(NSDictionary *)event completionHandler:(void(^)(NSError *error))completionHandler;
 
 /**
  Calling synchronize will tell the SDK to check for server-side context changes and will update monitored regions.
- The method gives you a way to load new context information if you are not using background push notifictions.
- @param completionHandler (optional) Called when the synchronization completes.  If an error occurs, the NSError wil be passed to the block.
+ The method gives you a way to load new context information if you are not using background push notifications.
+ @param completionHandler (optional) Called when the synchronization completes.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)synchronize:(void(^)(NSError *error))completionHandler;
 
@@ -183,7 +183,7 @@ extern NSString * const CCHUntaggedElements;
 - (BOOL)removeElementsWithTags:(NSArray *)tags;
 
 /**
- @return Returns an array of the tags that the pipline is tracking.
+ @return Returns an array of the tags that the pipeline is tracking.
  */
 - (NSArray *)elementTags;
 

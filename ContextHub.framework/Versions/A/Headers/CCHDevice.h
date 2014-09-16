@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  Gets a device from ContextHub using the device Id.
  
  @param deviceId The id of the device stored in ContextHub.
- @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the device.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the device.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)getDeviceWithId:(NSString *)deviceId completionHandler:(void(^)(NSDictionary *device, NSError *error))completionHandler;
 
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  Gets devices from ContextHub using the device alias.
  
  @param alias The alias associated with the devices that you are interested in.
- @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent the devices.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent the devices.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)getDevicesWithAlias:(NSString *)alias completionHandler:(void(^)(NSArray *devices, NSError *error))completionHandler;
 
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  Gets devices from ContextHub using tags.
  
  @param tags Tags of the devices that you are interested in.
- @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent the devices.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent the devices.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)getDevicesWithTags:(NSArray *)tags completionHandler:(void(^)(NSArray *devices, NSError *error))completionHandler;
 
@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, CCHDeviceErrorCode) {
  Updates the device record on contexthub.
  @param alias (optional) The alias associated with the device.
  @param tags (optional) The tags to be applied to the device.
- @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the device.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler Called when the request completes. The block is passed an NSDictionary object that represents the device.  If an error occurs, the NSError will be passed to the block.
  @note This method updates the data for the current device.  The tags and alias that are set here can be used with CCHPush.  The tags can also be used with the CCHSubscriptionService.  This method gathers meta-data about the device and sends it to ContextHub along with the alias and tags.  You can call this method multiple times.
  */
 - (void)setDeviceAlias:(NSString *)alias tags:(NSArray *)tags completionHandler:(void(^)(NSDictionary *device, NSError *error))completionHandler;

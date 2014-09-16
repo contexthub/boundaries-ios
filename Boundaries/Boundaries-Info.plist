@@ -21,9 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>173</string>
+	<string>204</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Boundaries needs to use background location updates for geofences to work correctly.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
