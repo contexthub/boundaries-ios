@@ -5,7 +5,7 @@
 //  Created by Travis Fischer on 9/18/13.
 //  Copyright (c) 2013 ChaiOne. All rights reserved.
 //
-//  Version 1.2.0
+//  Version 1.3.1
 //
 
 #import <Foundation/Foundation.h>

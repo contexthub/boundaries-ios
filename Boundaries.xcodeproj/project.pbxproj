@@ -165,8 +165,8 @@
 				1FF327C7199C34BC00F4BE0B /* BDYAppDelegate.m */,
 				1FF327E7199C358200F4BE0B /* BDYConstants.h */,
 				1FF327E8199C35A400F4BE0B /* ChaiOne.gpx */,
-				1FF327C9199C34BC00F4BE0B /* Images.xcassets */,
 				1FF32803199C35CF00F4BE0B /* Main_iPhone.storyboard */,
+				1FF327C9199C34BC00F4BE0B /* Images.xcassets */,
 				1FF327BE199C34BC00F4BE0B /* Supporting Files */,
 			);
 			path = Boundaries;
@@ -253,6 +253,7 @@
 			buildPhases = (
 				1FF327B0199C34BC00F4BE0B /* Sources */,
 				1FF327B1199C34BC00F4BE0B /* Frameworks */,
+				1F59C60919C0E32200A4AA89 /* ShellScript */,
 				1FF327B2199C34BC00F4BE0B /* Resources */,
 			);
 			buildRules = (
@@ -339,6 +340,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F59C60919C0E32200A4AA89 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1FF327B0199C34BC00F4BE0B /* Sources */ = {
@@ -479,7 +496,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Boundaries/Boundaries-Prefix.pch";
 				INFOPLIST_FILE = "Boundaries/Boundaries-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -496,7 +515,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Boundaries/Boundaries-Prefix.pch";
 				INFOPLIST_FILE = "Boundaries/Boundaries-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

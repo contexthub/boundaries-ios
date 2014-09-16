@@ -7,6 +7,7 @@
 //
 
 #import "BDYMapViewController.h"
+#import <ContextHub/ContextHub.h>
 
 #import "BDYGeofence.h"
 #import "BDYConstants.h"
@@ -40,8 +41,17 @@
     
     // Initialize location manager and get it to start updating our location
     self.locationManager = [[CLLocationManager alloc] init];
+    
+    // Needed for iOS 8
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    
     self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.locationManager startUpdatingLocation];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -240,7 +250,7 @@
         [self.mapView setRegion:newRegion animated:YES];
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
         
-        [self.locationManager stopUpdatingLocation];
+        //[self.locationManager stopUpdatingLocation];
     }
 }
 

@@ -35,11 +35,19 @@ typedef NS_ENUM(NSInteger, CCHSensorPipelineErrorCode) {
 @protocol CCHSensorPipelineDelegate <NSObject>
 
 @optional
+/** 
+ Called when events are detected on the device.
+ @param sensorPipeline The CCHSensorPipeline.
+ @param event The event that was triggered.
+ */
+- (void)sensorPipeline:(CCHSensorPipeline *)sensorPipeline
+        didDetectEvent:(NSDictionary *)event;
+
 /**
  Sometimes you may want to keep an event from posting to the ContextHub service.  This method gives you the opportunity to stop the call.
- If you return NO, none of the other delegate methods will git called, and the event will be discarded.
+ If you return NO, none of the other delegate methods will get called, and the event will be discarded.
  @note No history of the event will be captured if you return NO here.
- returns boolean indicating if the event should be posted to ContextHUB
+ @returns boolean indicating if the event should be posted to ContextHUB
  @param sensorPipeline The CCHSensorPipeline.
  @param event The event that was triggered.
  */
@@ -92,6 +100,11 @@ typedef NS_ENUM(NSInteger, CCHSensorPipelineErrorCode) {
 ///--------------------
 
 /**
+ Posted when an event is detected
+ */
+extern NSString * const CCHSensorPipelineDidDetectEvent;
+
+/**
  Posted before an event is posted to ContextHub
  */
 extern NSString * const CCHSensorPipelineWillPostEvent;
@@ -112,14 +125,17 @@ extern NSString * const CCHSensorPipelineDidCancelEvent;
 extern NSString * const CCHUntaggedElements;
 
 /**
- The CCHSensorPipeline monitors events as they are triggered.  You can use the CCHSensorPipline to gain access to the events before and after they are sent to the server, and gives you the ability to filter events and add custom data to events before they are sent to the ContextHub server.
- As events are triggered on the device, the framework will take assemble a dictionary of that includes data about the event.  
- The CCHSensorPipeline will call datasource and delegate lifecycle methods and post lifecycle notifications.
+ The CCHSensorPipeline monitors events as they are triggered.  You can use the CCHSensorPipeline to gain access to the events before and after they are sent to the server.  The CCHSensorPipelineDelegate and CCHSensorPipelineDataSource give you the ability to filter events and add custom data to events before they are sent to the ContextHub server.
+ As events are triggered on the device, the framework will assemble a context dictionary that includes data about the event.
+ The CCHSensorPipeline will call datasource and delegate life cycle methods and post lifecycle notifications.
  
  ## Notifications
  
- The following life-cycle notifications are posted.  The notifications are called before the associated delegate methods are called.
+ The following life cycle notifications are posted.  The notifications are called before the associated delegate methods are called.
 
+ ### CCHSensorPipelineDidDetectEvent
+ The object is the assembled context event.  The userInfo object is not set.
+ 
  ### CCHSensorPipelineWillPostEvent
  The object is the assembled context event.  The userInfo object is not set.
 
@@ -133,43 +149,43 @@ extern NSString * const CCHUntaggedElements;
 @interface CCHSensorPipeline : NSObject
 
 /**
- Returns the singleton instnace of the CCHSensorPipeline
+ Returns the singleton instanace of the CCHSensorPipeline
  */
 + (instancetype)sharedInstance;
 
 /**
  This method give you the ability to trigger custom events on the ContextHub sensor pipeline
  @param event The event that you want to send to the server.
- @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError wil be passed to the block.
+ @param completionHandler (optional) Called when the event is created.  If an error occurs, the NSError will be passed to the block.
  @note The event must contain a name key.  If you want to pass contextual information along with the event, you can do so by setting a data key for the event.
  */
 - (void)triggerEvent:(NSDictionary *)event completionHandler:(void(^)(NSError *error))completionHandler;
 
 /**
  Calling synchronize will tell the SDK to check for server-side context changes and will update monitored regions.
- The method gives you a way to load new context information if you are not using background push notifictions.
- @param completionHandler (optional) Called when the synchronization completes.  If an error occurs, the NSError wil be passed to the block.
+ The method gives you a way to load new context information if you are not using background push notifications.
+ @param completionHandler (optional) Called when the synchronization completes.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)synchronize:(void(^)(NSError *error))completionHandler;
 
 /** 
- To enable automatic region monitoring for geofences and iBeacons you must subscribe to their tags.
+ To enable automatic region monitoring for geofences and iBeacons you must add the tags of the elements to the sensor pipeline.
  @param tags The tags of the elements that you want to monitor.
  @return Returns A boolean indicating that the tags were added successfully.
  */
-- (BOOL)addSubscriptionForTags:(NSArray *)tags;
+- (BOOL)addElementsWithTags:(NSArray *)tags;
 
 /**
- To disable automatic region monitoring for geofences and beacons, you must remove subscriptions.
+ To disable automatic region monitoring for geofences and beacons, you must remove the tags from the sensor pipeline.
   @param tags The tags of the elements that you want to stop monitoring.
   @return Returns A boolean indicating that the tags were removed successfully.
  */
-- (BOOL)removeSubscriptionForTags:(NSArray *)tags;
+- (BOOL)removeElementsWithTags:(NSArray *)tags;
 
 /**
- @return Returns an array of the tags that you have subscribed to.
+ @return Returns an array of the tags that the pipeline is tracking.
  */
-- (NSArray *)subscriptions;
+- (NSArray *)elementTags;
 
 /**
  The CCHSensorPipelineDelegate
