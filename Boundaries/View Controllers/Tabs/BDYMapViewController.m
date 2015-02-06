@@ -27,15 +27,11 @@
 {
     [super viewDidLoad];
     
-    // Set the map to where the user is located currently, and turn on tracking mode.
-    MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, 1500, 1500);
-    [self.mapView setRegion:newRegion animated:YES];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
-    
     self.geofenceArray = [NSMutableArray array];
-    
     self.verboseContextHubLogging = YES; // Verbose logging shows all responses from ContextHub
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     // Register to listen to notifications about geofence entering or leaving
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:CCHSensorPipelineDidPostEvent object:nil];
     
@@ -48,13 +44,12 @@
     }
     
     self.locationManager.delegate = self;
+    self.mapView.showsUserLocation = YES;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.locationManager startUpdatingLocation];
     });
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    
     // Refresh all geofences
     [self refreshGeofences];
 }
@@ -79,7 +74,7 @@
                 NSLog(@"BDY: [CCHGeofenceService getGeofencesWithTags: location: radius: completionHandler:] response: %@", geofences);
             }
             
-            NSLog(@"BDY: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
+            NSLog(@"BDY: Succesfully synced %lu new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
             [self.geofenceArray removeAllObjects];
             
@@ -250,7 +245,7 @@
         [self.mapView setRegion:newRegion animated:YES];
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
         
-        //[self.locationManager stopUpdatingLocation];
+        [self.locationManager stopUpdatingLocation];
     }
 }
 

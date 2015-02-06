@@ -293,6 +293,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = ChaiOne;
 				TargetAttributes = {
+					1FF327B3199C34BC00F4BE0B = {
+						DevelopmentTeam = K83DSSAEPP;
+					};
 					1FF327CE199C34BC00F4BE0B = {
 						TestTargetID = 1FF327B3199C34BC00F4BE0B;
 					};

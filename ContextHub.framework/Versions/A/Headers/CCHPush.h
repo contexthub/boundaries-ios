@@ -8,9 +8,30 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "CCHContextHubPush.h"
 
-/**
+ /**
  The push service is used to register devices and to send push notifications with the ContextHub Push service.
+ 
+ The userInfo dictionary that is passed to the methods in this api can contain custom data and standard apple push notification properties.
+ This implementation will pull out the apns and ContextHub keys and pass all other items as custom data.
+ 
+       Keys
+ | key   | value |
+ | ----- | ----- |
+ | alert | the message you want sent |
+ | sound | sound file you want played |
+ | content-available | pass in a 1 if you want to deliver a push in the background |
+ | badge | the number to be displayed on the icon |
+ | exclude_device_ids | an array of the device ids that should be excluded |
+ | exclude_push_tokens | an array of push tokens that should be excluded |
+ | mdm | mobile device management key |
+ | priority | can be either be set to 10 (immediate) or 5 (conserve power) |
+ | expiry | identifies when a notification is no longer valid and can be discarded.  The default is 1 day |
+ | category | category for push |
+ | url_args | sets the url arguments |
+ | collapse_key | used to group messages on the Google Cloud Messaging service |
+ 
  */
 @interface CCHPush : NSObject
 
@@ -31,20 +52,8 @@
 
 /**
  Send Push Notifications to devices.
- 
- The userInfo dictionary can contain custom data and standard apple push notification properties.
- This implementation will pull out the apns keys and pass all other items as custom data.
- 
-      userInfo
- | key   | value |
- | ----- | ----- |
- | alert | the message you want sent |
- | sound | sound you want played |
- | content-available | pass in a 1 if you want to deliver a push in the background |
- | badge | the number to be displayed on the icon |
-
-  @param devices The device Id's to notify.
-  @param userInfo Other data to be sent in the notification
+  @param devices The device ids to notify.
+  @param userInfo The data to be sent in the notification.
   @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
  */
 - (void)sendNotificationToDevices:(NSArray *)devices userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
@@ -52,20 +61,9 @@
 
 /**
  Send Push Notification to aliases.
- 
- The userInfo dictionary can contain custom data and standard apple push notification properties.
- This implementation will pull out the apns keys and pass all other items as custom data.
- 
-      userInfo
- | key   | value |
- | ----- | ----- |
- | alert | the message you want sent |
- | sound | the name of the sound file that you want to be played |
- | content-available | pass in a 1 if you want to deliver a push in the background |
- | badge | the number to be displayed on the icon |
 
  @param aliases The aliases to notify.
- @param userInfo Other data to be sent in the notification.
+ @param userInfo The data to be sent in the notification.
  @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
  */
 - (void)sendNotificationToAliases:(NSArray *)aliases userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
@@ -73,23 +71,21 @@
 
 /**
  Send Push Notification to tags.
- 
- The userInfo dictionary can contain custom data and standard apple push notification properties.
- This implementation will pull out the apns keys and pass all other items as custom data.
- 
-      userInfo
- | key   | value |
- | ----- | ----- |
- | alert | the message you want sent |
- | sound | sound you want played |
- | content-available | pass in a 1 if you want to deliver a push in the background |
- | badge | the number to be displayed on the icon |
- 
  @param tags The tags to notify.
- @param userInfo Other data to be sent in the notification.
+ @param userInfo The data to be sent in the notification.
  @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
  */
 - (void)sendNotificationToTags:(NSArray *)tags userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
+
+/**
+ Send Push Notification to tags.
+ 
+ @param tags The tags to notify.
+ @param tagOperator (optional) Operator used to build the query with the tags.  Passing ANY will find all geofences that match any of the tags. Passing ALL will find geofences that have all of the tags provided.  Passing nil will use the default ALL operator.
+ @param userInfo  The data to be sent in the notification.
+ @param completionHandler Completion block.  If an error occurs an NSError will be passed to the block.
+ */
+- (void)sendNotificationToTags:(NSArray *)tags operator:(NSString *)tagOperator userInfo:(NSDictionary *)userInfo completionHandler:(void (^)(NSError *error))completionHandler;
 
 
 /**
@@ -99,7 +95,6 @@
  @param userInfo The NSDictionary that was delivered with the remote notification.
  @param completionHandler A completion block that is executed when the context sync is completed.  The CCHContextHubPush BOOL indicates if the push notification was generated by ContextHub.
  */
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)(enum UIBackgroundFetchResult result, BOOL CCHContextHubPush))completionHandler;
-
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)(enum UIBackgroundFetchResult result, CCHContextHubPush *contextHubPush))completionHandler;
 
 @end

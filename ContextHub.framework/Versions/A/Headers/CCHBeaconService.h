@@ -84,6 +84,14 @@ typedef NS_ENUM(NSInteger, CCHBeaconServiceErrorCode) {
 - (void)getBeaconsWithTags:(NSArray *)tags completionHandler:(void (^)(NSArray *beacons, NSError *error))completionHandler;
 
 /**
+ Gets beacons from the ContextHub server.
+ @param tags (optional) Tags of the beacons that you are interested in.  Passing nil will return beacons without tags.
+ @param tagOperator (optional) Operator used to build the query with the tags.  Passing ANY will find all geofences that match any of the tags. Passing ALL will find geofences that have all of the tags provided.  Passing nil will use the default ALL operator.
+ @param completionHandler Called when the request completes.  The block is passed an NSArray of NSDictionary objects that represent iBeacons.  If an error occurs, the NSError will be passed to the block.
+ */
+- (void)getBeaconsWithTags:(NSArray *)tags operator:(NSString *)tagOperator completionHandler:(void (^)(NSArray *beacons, NSError *error))completionHandler;
+
+/**
  Updates a beacon on the ContextHub server.
  @param beacon The beacon to be updated on ContextHub.
  @param completionHandler Called when the request completes.  If an error occurs, the NSError will be passed to the block.
@@ -104,6 +112,5 @@ typedef NS_ENUM(NSInteger, CCHBeaconServiceErrorCode) {
  @return A CLBeaconRegion from a beacon dictionary.
  */
 + (CLBeaconRegion *)regionForBeacon:(NSDictionary *)beacon;
-
 
 @end

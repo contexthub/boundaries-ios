@@ -24,62 +24,67 @@ typedef NS_ENUM(NSInteger, CCHSubscriptionErrorCode) {
 ///--------------------
 
 /**
- Posted to tagged beacon subscribers when a corresponding tagged beacon is created.
+ Posted to subscribers when a tagged resource is created, updated, or deleted.
+ */
+extern NSString * const CCHSubscriptionResourceChangeNotification;
+
+/**
+ Posted to beacon subscribers when a corresponding tagged beacon is created.
  */
 extern NSString * const CCHBeaconCreatedNotification;
 
 /**
- Posted to tagged beacon subscribers when a corresponding tagged beacon is updated.
+ Posted to beacon subscribers when a corresponding tagged beacon is updated.
  */
 extern NSString * const CCHBeaconUpdatedNotification;
 
 /**
- Posted to tagged beacon subscribers when a corresponding tagged beacon is deleted.
+ Posted to beacon subscribers when a corresponding tagged beacon is deleted.
  */
 extern NSString * const CCHBeaconDeletedNotification;
 
 /**
- Posted to tagged geofence subscribers when a corresponding tagged geofence is created.
+ Posted to geofence subscribers when a corresponding tagged geofence is created.
  */
 extern NSString * const CCHGeofenceCreatedNotification;
 
 /**
- Posted to tagged geofence subscribers when a corresponding tagged geofence is updated.
+ Posted to geofence subscribers when a corresponding tagged geofence is updated.
  */
 extern NSString * const CCHGeofenceUpdatedNotification;
 
 /**
- Posted to tagged geofence subscribers when a corresponding tagged geofence is deleted.
+ Posted to geofence subscribers when a corresponding tagged geofence is deleted.
  */
 extern NSString * const CCHGeofenceDeletedNotification;
 
 /**
- Posted to tagged vault subscribers when a corresponding tagged vault item is created.
+ Posted to vault subscribers when a corresponding tagged vault item is created.
  */
 extern NSString * const CCHVaultItemCreatedNotification;
 
 /**
- Posted to tagged vault subscribers when a corresponding tagged vault item is updated.
+ Posted to vault subscribers when a corresponding tagged vault item is updated.
  */
 extern NSString * const CCHVaultItemUpdatedNotification;
 
 /**
- Posted to tagged vault subscribers when a corresponding tagged vault item is deleted.
+ Posted to vault subscribers when a corresponding tagged vault item is deleted.
  */
 extern NSString * const CCHVaultItemDeletedNotification;
 
 /**
- Posted to tagged device subscribers when a corresponding tagged device is created.
+ Posted to device subscribers when a corresponding tagged device is created.
  */
 extern NSString * const CCHDeviceCreatedNotification;
 
 /**
- Posted to tagged device subscribers when a corresponding tagged device is updated.
+ Posted to device subscribers when a corresponding tagged device is updated.
  */
 extern NSString * const CCHDeviceUpdatedNotification;
 
 /**
- Posted to tagged device subscribers when a corresponding tagged device is deleted.
+ Posted to device subscribers when a corresponding tagged device is deleted.
  */
 extern NSString * const CCHDeviceDeletedNotification;
 
@@ -209,4 +214,5 @@ When server changes are made, the device is notified using a background push not
  @param completionHandler (optional) Is executed when the request completes.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)removeSubscriptionsForTags:(NSArray *)tags options:(NSArray *)options completionHandler:(void(^)(NSError *error))completionHandler;
+
 @end

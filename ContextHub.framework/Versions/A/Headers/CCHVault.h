@@ -90,11 +90,12 @@ typedef void (^vaultListingCompletionBlock)(NSArray *responses, NSError *error);
  @note If you pass a keyPath and a value, it will return all items that have the key path equal to the value.
  If you pass only a keyPath, it will return all items that conatin the keypath.  If you do not pass a keyPath, then both the keypath and value are ignored.
  @param tags (optional) The tags to be applied to the item.
+ @param tagOperator (optional) Operator used to build the query with the tags.  Passing ANY will find all items that match any of the tags. Passing ALL will find items that have all of the tags provided.  Passing nil will use the default ALL operator.
  @param keyPath (optional) The keyPath that you want to look for.
  @param value (optional) The value that you want to find for the keyPath.
  @param completionHandler Called when the request completes. The block is passed an NSArray of dictionaries that represent the items.  If an error occurs, the NSError will be passed to the block.
  */
-- (void)getItemsWithTags:(NSArray *)tags keyPath:(NSString *)keyPath value:(NSString *)value completionHandler:(vaultListingCompletionBlock)completionHandler;
+- (void)getItemsWithTags:(NSArray *)tags operator:(NSString *)tagOperator keyPath:(NSString *)keyPath value:(NSString *)value completionHandler:(vaultListingCompletionBlock)completionHandler;
 
 /**
  Updates an item in the Vault.
@@ -109,6 +110,5 @@ typedef void (^vaultListingCompletionBlock)(NSArray *responses, NSError *error);
  @param completionHandler (optional) Called when the request completes. If an error occurs, the NSError will be passed to the block.
  */
 - (void)deleteItem:(NSDictionary *)item completionHandler:(void(^)(NSDictionary *response, NSError *error))completionHandler;
-
 
 @end

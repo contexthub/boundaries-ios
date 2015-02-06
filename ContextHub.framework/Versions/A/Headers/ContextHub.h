@@ -5,7 +5,7 @@
 //  Created by Travis Fischer on 9/18/13.
 //  Copyright (c) 2013 ChaiOne. All rights reserved.
 //
-//  Version 1.3.1
+//  Version 1.6.0
 //
 
 #import <Foundation/Foundation.h>
@@ -21,6 +21,7 @@
 
 //Application Services
 #import "CCHPush.h"
+#import "CCHContextHubPush.h"
 #import "CCHVault.h"
 #import "CCHDevice.h"
 
@@ -60,4 +61,5 @@
  build version
  */
 extern NSString * const CCHVersion;
+
 @end

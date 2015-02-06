@@ -82,11 +82,22 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
  Gets geofences from ContextHub server.
  
  @param tags (optional) Tags of the geofences that you are interested in.  Passing nil will return geofences without tags.
- @param location (optional) Locatoin is used to filter the results to the nearest geofences.  Passing nil will remove the location filter.
+ @param location (optional) Location is used to filter the results to the nearest geofences.  Passing nil will remove the location filter.
  @param radius (optional) Radius in meters around the location which ContextHub considers "nearby". Passing nil to location will cause this parameter to be ignored. Passing 0 will use the default radius of 50 miles (80437 meters)
  @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent geofences.  If an error occurs, the NSError will be passed to the block.
  */
 - (void)getGeofencesWithTags:(NSArray *)tags location:(CLLocation *)location radius:(CLLocationDistance)radius completionHandler:(void(^)(NSArray *geofences, NSError *error))completionHandler;
+
+/**
+ Gets geofences from ContextHub server.
+ 
+ @param tags (optional) Tags of the geofences that you are interested in.  Passing nil will return geofences without tags.
+ @param tagOperator (optional) Operator used to build the query with the tags.  Passing ANY will find all geofences that match any of the tags. Passing ALL will find geofences that have all of the tags provided.  Passing nil will use the default ALL operator.
+ @param location (optional) Location is used to filter the results to the nearest geofences.  Passing nil will remove the location filter.
+ @param radius (optional) Radius in meters around the location which ContextHub considers "nearby". Passing 0 to radius will cause this parameter to be ignored. Passing 0 will use the default radius of 50 miles (80437 meters)
+ @param completionHandler Called when the request completes. The block is passed an NSArray of NSDictionary objects that represent geofences.  If an error occurs, the NSError will be passed to the block.
+ */
+- (void)getGeofencesWithTags:(NSArray *)tags operator:(NSString *)tagOperator location:(CLLocation *)location radius:(CLLocationDistance)radius completionHandler:(void(^)(NSArray *geofences, NSError *error))completionHandler;
 
 /**
  Updates a geofence on the ContextHub server.
@@ -112,4 +123,5 @@ typedef NS_ENUM(NSInteger, CCHGeofenceServiceErrorCode) {
  @return A CLCircularRegion from a geofence dictionary.
  */
 + (CLCircularRegion *)regionForGeofence:(NSDictionary *)geofence;
+
 @end

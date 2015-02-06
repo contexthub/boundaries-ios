@@ -41,4 +41,5 @@ typedef NS_ENUM(NSInteger, CCHLogErrorCode) {
  @note These logs are not cached locally.  You must have an internet connection when this method is called if you want the logs to show on the server.
  */
 - (void)log:(NSString *)message userInfo:(NSDictionary *)userInfo completionHandler:(void(^)(NSError *error))completionHandler;
+
 @end

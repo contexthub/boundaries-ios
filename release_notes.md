@@ -1,6 +1,9 @@
 # Boundaries (Geofences) Sample App Release Notes
 ---
 
+## v1.3.5 (Build 221) - February 5, 2015
+- Update to ContextHub v1.6 framework
+
 ## v1.3.4 (Build 204) - September 17, 2014
 - Update to ContextHub v1.3.1 framework
 - Update compatibility for iOS 8 
@@ -16,12 +19,12 @@
 ## v1.3.1 (Build 171) - August 11, 2014
 - Fix bug where app would alert an error when updating or deleting geofences
 - Sort geofences in list by name
-- Updated README
+- Update README
 
 ## v1.3.0 (Build 164) - August 5, 2014
 - Rewrite sample app to more directly show how to use the SDK (previous version still available in separate branch)
 - Add verbose logging from ContextHub responses
-- Updated README
+- Update README
 
 ## v1.2.0 (Build 145) - August 2, 2014
 - Add List tab which shows geofences currently on ContextHub with tag "geofence-tag"

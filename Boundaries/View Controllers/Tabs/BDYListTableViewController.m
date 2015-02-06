@@ -49,7 +49,7 @@
                 NSLog(@"BDY: [CCHGeofenceService getGeofencesWithTags: location: radius: completionHandler:] response: %@", geofences);
             }
             
-            NSLog(@"BDY: Succesfully synced %d new geofences from ContextHub", geofences.count - self.geofenceArray.count);
+            NSLog(@"BDY: Succesfully synced %lu new geofences from ContextHub", geofences.count - self.geofenceArray.count);
             
             [self.geofenceArray removeAllObjects];
             
